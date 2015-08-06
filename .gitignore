@@ -1,0 +1,8 @@
+# Ignore IntelliJ
+.idea/**
+
+# Ignore Mac OS files
+.DS_Store
+
+# Ignore node_modules
+node_modules/**

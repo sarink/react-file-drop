@@ -1,0 +1,38 @@
+{
+    "name": "react-file-drop",
+    "author": "Kabir Sarin",
+    "version": "0.1.0",
+    "description": "",
+    "main": "./FileDrop",
+    "keywords": [
+        "react",
+        "react-file-drop",
+        "file",
+        "upload",
+        "drag",
+        "drop",
+        "drag n drop",
+        "react file upload",
+        "react file drag drop",
+        "window",
+        "document"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sarink/react-file-drop.git"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/sarink/react-file-drop/issues"
+    },
+    "homepage": "https://github.com/sarink/react-file-drop#readme",
+    "dependencies": {
+    },
+    "peerDependencies": {
+        "react": "^0.13 || 0.14.0-beta1"
+    },
+    "devDependencies": {
+    },
+    "directories": {
+    }
+}
