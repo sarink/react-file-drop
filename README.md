@@ -3,9 +3,9 @@
 ### By default, there are no styles! You must include some CSS if you want to see anything!
 
 ## Demo/Example
-There's a very simple demo with example code and CSS avaiable [here](http://localhost/react-file-drop/demo/).  
+There's a very simple demo with example code and CSS avaiable [here](http://sarink.github.io/react-file-drop/demo/).  
 
-If this doesn't look very fancy, it's because it's not meant to! You are encouraged to style it yourself. You can steal [the CSS](http://localhost/react-file-drop/demo/file-drop.css) from the demo site as a base to go off if you wish, but by default there are no styles included, you get just a react component.
+If this doesn't look very fancy, it's because it's not meant to! You are encouraged to style it yourself. You can steal [the CSS](http://sarink.github.io/react-file-drop/demo/file-drop.css) from the demo site as a base to go off if you wish, but by default there are no styles included, you get just a react component.
 
 ## Installation
 * As an npm module: ``npm install react-file-drop``
@@ -52,7 +52,7 @@ Callback when the user stops dragging over the ``frame``
 Callback when the user drops files *anywhere* over the ``frame``
 
 ## Styling
-By default, the component comes with no styles. You can grab the [demo CSS](http://localhost/react-file-drop/demo/file-drop.css) to get you started.
+By default, the component comes with no styles. You can grab the [demo CSS](http://sarink.github.io/react-file-drop/demo/file-drop.css) to get you started.
 
 ##### .file-drop
 The outer container element
