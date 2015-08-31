@@ -1,4 +1,5 @@
 # react-file-drop
+React component for Gmail or Facbook -like drag and drop file uploader. Drag files anywhere onto the window (or user defined "frame" prop)! Very extensible, provides many hooks so you can use it to develop any custom behavior that you desire.
 
 ### By default, there are no styles! You must include some CSS if you want to see anything!
 
