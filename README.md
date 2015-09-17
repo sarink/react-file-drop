@@ -1,16 +1,14 @@
 # react-file-drop
 React component for Gmail or Facebook -like drag and drop file uploader. Drag files anywhere onto the window (or user defined "frame" prop)! Very extensible, provides many hooks so you can use it to develop any custom behavior that you desire.
 
-### By default, there are no styles! You must include some CSS if you want to see anything!
+### By default, no styles are applied, but props are available to customize styling based on the component's state.
 
 ## Demo/Example
-There's a very simple demo with example code and CSS avaiable [here](http://sarink.github.io/react-file-drop/demo/).  
-
-If this doesn't look very fancy, it's because it's not meant to! You are encouraged to style it yourself. You can steal [the CSS](http://sarink.github.io/react-file-drop/demo/file-drop.css) from the demo site as a base to go off if you wish, but by default there are no styles included, you get just a react component.
+There's a very simple demo of the original package, with example code and CSS, available [here](http://sarink.github.io/react-file-drop/demo/).  
 
 ## Installation
-* As an npm module: ``npm install react-file-drop``
-* Stand-alone: [download the source](https://raw.githubusercontent.com/sarink/react-file-drop/master/FileDrop.js)
+* This forked module is not yet published to npm.
+* Stand-alone: [download the source](https://raw.githubusercontent.com/motiz88/react-file-drop/master/FileDrop.js)
 
 ## Why?
 I wanted that behavior like facebook, gmail, etc. have where a part of the page highlights immediately when you start dragging a file anywhere on the window. I couldn't find any React component that already did this, so, I made one.
@@ -38,7 +36,7 @@ Callback when the user leaves the target. Removes the ``file-drop-dragging-over-
 Learn more about [HTML5 dropEffects](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer#dropEffect.28.29)
 
 ##### targetAlwaysVisible - Boolean (default: false)
-If you'd like the ``file-drop-target`` div to always be visible (otherwise, it's only visible when the user begins dragging over the ``frame``)
+If you'd like the drop target to always be visible (otherwise, it's only visible when the user begins dragging over the ``frame``)
 
 ##### frame - document || window || HTMLElement  (default: document)
 This is the "scope" or frame that the user must drag some file(s) over to kick things off.
@@ -52,17 +50,11 @@ Callback when the user stops dragging over the ``frame``
 ##### onFrameDrop - function(event)
 Callback when the user drops files *anywhere* over the ``frame``
 
-## Styling
-By default, the component comes with no styles. You can grab the [demo CSS](http://sarink.github.io/react-file-drop/demo/file-drop.css) to get you started.
+##### style - Object
+Inline styles to apply to the outer container element.
 
-##### .file-drop
-The outer container element
-
-##### .file-drop > file-drop-target
-This is the target the user has to drag their files to. It will be inserted into the DOM whenever the user starts dragging over the frame, or if you set ``targetAlwaysVisible={true}``
-
-##### .file-drop > .file-drop-target.file-drop-dragging-over-frame
-The ``file-drop-dragging-over-frame`` class will be added to the ``file-drop-target`` whenever the user begins dragging a file over the ``frame``, and it will be removed when they leave
-
-##### .file-drop > .file-drop-target.file-drop-dragging-over-target
-The ``file-drop-dragging-over-target`` class will be added to the ``file-drop-target`` whenever the user begins dragging a file over the ``file-drop-target`` div, and it will be removed when they leave
+##### dropTargetStyles - Object {base: Object, draggingOverFrame: Object, draggingOverTarget: Object}
+Inline styles to apply to the drop target element. This is the target the user has to drag their files to. It will be inserted into the DOM whenever the user starts dragging over the frame, or if you set ``targetAlwaysVisible={true}``.
+* The ``base`` style is always set.
+* The ``draggingOverFrame`` style is additionally applied while the user is dragging a file over the ``frame``.
+* The ``draggingOverTarget`` style is additionally applied while the user is dragging a file over the drop target element. 
