@@ -4,11 +4,13 @@ React component for Gmail or Facebook -like drag and drop file uploader. Drag fi
 ### By default, no styles are applied, but props are available to customize styling based on the component's state.
 
 ## Demo/Example
-There's a very simple demo of the original package, with example code and CSS, available [here](http://sarink.github.io/react-file-drop/demo/).  
+There's a very simple demo of an earlier version of the package, with example code and CSS, available [here](http://sarink.github.io/react-file-drop/demo/).  
+
+If this doesn't look very fancy, it's because it's not meant to! You are encouraged to style it yourself. 
 
 ## Installation
-* This forked module is not yet published to npm.
-* Stand-alone: [download the source](https://raw.githubusercontent.com/motiz88/react-file-drop/master/FileDrop.js)
+* As an npm module: ``npm install react-file-drop``
+* Stand-alone: [download the source](https://raw.githubusercontent.com/sarink/react-file-drop/master/FileDrop.js)
 
 ## Why?
 I wanted that behavior like facebook, gmail, etc. have where a part of the page highlights immediately when you start dragging a file anywhere on the window. I couldn't find any React component that already did this, so, I made one.
