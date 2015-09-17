@@ -12,7 +12,7 @@
     else {
         factory(root.React, root.objectAssign);
     }
-}(this, function(React) {
+}(this, function(React, objectAssign) {
 
     var FileDrop = React.createClass({
         displayName: "FileDrop",
