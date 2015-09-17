@@ -27,11 +27,14 @@
     },
     "homepage": "https://github.com/sarink/react-file-drop#readme",
     "dependencies": {
+        "object-assign": "^4.0.1"
     },
     "peerDependencies": {
-        "react": "^0.13 || 0.14.0-beta1"
+        "react": ">=0.13"
     },
     "devDependencies": {
+        "webpack": "^1.12.2",
+        "webpack-dev-server": "^1.11.0"
     },
     "directories": {
     }

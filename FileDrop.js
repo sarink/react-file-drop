@@ -1,17 +1,18 @@
 (function(root, factory) {
     if (typeof exports !== "undefined") {
         var React = require("react");
-        module.exports = factory(React);
+        var objectAssign = require('object-assign');
+        module.exports = factory(React, objectAssign);
     }
     else if (typeof define === "function" && define.amd) {
-        define(["react"], function(React) {
-            return factory(React);
+        define(["react", "object-assign"], function(React, objectAssign) {
+            return factory(React, objectAssign);
         });
     }
     else {
-        factory(root.React);
+        factory(root.React, root.objectAssign);
     }
-}(this, function(React) {
+}(this, function(React, objectAssign) {
 
     var FileDrop = React.createClass({
         displayName: "FileDrop",
@@ -33,7 +34,13 @@
             },
             onFrameDragEnter: React.PropTypes.func,
             onFrameDragLeave: React.PropTypes.func,
-            onFrameDrop: React.PropTypes.func
+            onFrameDrop: React.PropTypes.func,
+            style: React.PropTypes.object,
+            dropTargetStyles: React.PropTypes.shape({
+                base: React.PropTypes.object,
+                draggingOverFrame: React.PropTypes.object,
+                draggingOverTarget: React.PropTypes.object
+            })
         },
 
         getDefaultProps: function () {
@@ -100,19 +107,18 @@
 
         render: function () {
             var fileDropTarget;
-            var fileDropTargetClassName = "file-drop-target";
+            var fileDropTargetStyles = [{}, (this.props.dropTargetStyles || {}).base];
             if (this.props.targetAlwaysVisible || this.state.draggingOverFrame) {
-                fileDropTargetClassName += " file-drop-dragging-over-frame";
-                if (this.state.draggingOverTarget) fileDropTargetClassName += " file-drop-dragging-over-target";
+                fileDropTargetStyles.push((this.props.dropTargetStyles || {}).draggingOverFrame);
+                if (this.state.draggingOverTarget) fileDropTargetStyles.push((this.props.dropTargetStyles || {}).draggingOverTarget);
                 fileDropTarget = (
-                    React.createElement("div", {className: fileDropTargetClassName},
+                    React.createElement("div", {style: objectAssign.apply(null, fileDropTargetStyles)},
                         this.props.children
                     )
                 );
             }
-            var className = (this.props.className || "") + " file-drop";
             return (
-                React.createElement("div", {className: className, onDrop: this._handleDrop, onDragLeave: this._handleDragLeave, onDragOver: this._handleDragOver},
+                React.createElement("div", {style: this.props.style, onDrop: this._handleDrop, onDragLeave: this._handleDragLeave, onDragOver: this._handleDragOver},
                     fileDropTarget
                 )
             );
