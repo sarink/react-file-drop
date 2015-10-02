@@ -102,7 +102,7 @@
             var fileDropTarget;
             var fileDropTargetClassName = "file-drop-target";
             if (this.props.targetAlwaysVisible || this.state.draggingOverFrame) {
-                fileDropTargetClassName += " file-drop-dragging-over-frame";
+                if (this.state.draggingOverFrame) fileDropTargetClassName += " file-drop-dragging-over-frame";
                 if (this.state.draggingOverTarget) fileDropTargetClassName += " file-drop-dragging-over-target";
                 fileDropTarget = (
                     React.createElement("div", {className: fileDropTargetClassName},
@@ -110,7 +110,10 @@
                     )
                 );
             }
-            var className = (this.props.className || "") + " file-drop";
+            var className = "file-drop";
+            if (this.props.className) {
+                className += " " + this.props.className;
+            }
             return (
                 React.createElement("div", {className: className, onDrop: this._handleDrop, onDragLeave: this._handleDragLeave, onDragOver: this._handleDragOver},
                     fileDropTarget
