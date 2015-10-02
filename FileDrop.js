@@ -110,7 +110,10 @@
                     )
                 );
             }
-            var className = (this.props.className || "") + " file-drop";
+            var className = "file-drop";
+            if (this.props.className) {
+                className += " " + this.props.className;
+            }
             return (
                 React.createElement("div", {className: className, onDrop: this._handleDrop, onDragLeave: this._handleDragLeave, onDragOver: this._handleDragOver},
                     fileDropTarget
