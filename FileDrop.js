@@ -95,7 +95,9 @@
 
         _handleFrameDrop: function(event) {
             this.resetDragging();
-            if (this.props.onFrameDrop) this.props.onFrameDrop(event);
+            if (!this.state.draggingOverTarget) {
+                if (this.props.onFrameDrop) this.props.onFrameDrop(event);
+            }
         },
 
         render: function () {
