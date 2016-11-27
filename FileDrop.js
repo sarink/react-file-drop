@@ -56,6 +56,7 @@
             if (this.props.onDrop) {
                 var files = (event.dataTransfer) ? event.dataTransfer.files : (event.frame) ? event.frame.files : undefined;
                 this.props.onDrop(files, event);
+                this.resetDragging();
             }
         },
 
@@ -94,8 +95,8 @@
         },
 
         _handleFrameDrop: function(event) {
-            this.resetDragging();
             if (!this.state.draggingOverTarget) {
+                this.resetDragging();
                 if (this.props.onFrameDrop) this.props.onFrameDrop(event);
             }
         },
