@@ -4,9 +4,9 @@ React component for Gmail or Facbook -like drag and drop file uploader. Drag fil
 ### By default, there are no styles! You must include some CSS if you want to see anything!
 
 ## Demo/Example
-There's a very simple demo with example code and CSS avaiable [here](http://sarink.github.io/react-file-drop/demo/).  
+There's a very simple demo with example code and CSS available [here](http://sarink.github.io/react-file-drop/demo/).  
 
-If this doesn't look very fancy, it's because it's not meant to! You are encouraged to style it yourself. You can steal [the CSS](http://sarink.github.io/react-file-drop/demo/file-drop.css) from the demo site as a base to go off if you wish, but by default there are no styles included, you get just a react component.
+If this doesn't look very fancy, it's because it's not meant to! You are encouraged to style it yourself. You can steal [the CSS](http://sarink.github.io/react-file-drop/demo/file-drop.css) from the demo site as a base to go off of if you wish, but by default there are no styles included, you get just a react component.
 
 ## Installation
 * As an npm module: ``npm install react-file-drop``
