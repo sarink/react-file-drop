@@ -86,8 +86,12 @@
             // "draggingOverFrame" (b/c you get one "dragenter" initially, and one "dragenter"/one "dragleave" for every bubble)
             this._dragCount += (event.type === "dragenter" ? 1 : -1);
             if (this._dragCount === 1) {
+                if (this.props.onFrameDragEnter) {
+					if (this.props.onFrameDragEnter(event) === false) {
+						return;
+					}
+				}
                 this.setState({draggingOverFrame: true});
-                if (this.props.onFrameDragEnter) this.props.onFrameDragEnter(event);
             } else if (this._dragCount === 0) {
                 if (this.props.onFrameDragLeave) this.props.onFrameDragLeave(event);
                 this.setState({draggingOverFrame: false});
