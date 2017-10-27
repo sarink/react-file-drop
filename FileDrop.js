@@ -1,27 +1,29 @@
 (function(root, factory) {
     if (typeof exports !== "undefined") {
         var React = require("react");
-        module.exports = factory(React);
+        var PropTypes = require("prop-types");
+        var createReactClass = require("create-react-class");
+        module.exports = factory(React, PropTypes, createReactClass);
     }
     else if (typeof define === "function" && define.amd) {
-        define(["react"], function(React) {
-            return factory(React);
+        define(["react", "prop-types", "create-react-class"], function(React, PropTypes, createReactClass) {
+            return factory(React, PropTypes, createReactClass);
         });
     }
     else {
-        factory(root.React);
+        factory(root.React, root.PropTypes, root.createReactClass);
     }
-}(this, function(React) {
+}(this, function(React, PropTypes, createReactClass) {
 
-    var FileDrop = React.createClass({
+    var FileDrop = createReactClass({
         displayName: "FileDrop",
 
         propTypes: {
-            onDrop: React.PropTypes.func,
-            onDragOver: React.PropTypes.func,
-            onDragLeave: React.PropTypes.func,
-            dropEffect: React.PropTypes.oneOf(["copy", "move", "link", "none"]),
-            targetAlwaysVisible: React.PropTypes.bool,
+            onDrop: PropTypes.func,
+            onDragOver: PropTypes.func,
+            onDragLeave: PropTypes.func,
+            dropEffect: PropTypes.oneOf(["copy", "move", "link", "none"]),
+            targetAlwaysVisible: PropTypes.bool,
             frame: function (props, propName, componentName) {
                 var prop = props[propName];
                 if (prop == null) {
@@ -31,9 +33,9 @@
                     return new Error("Warning: Prop `" + propName + "` must be one of the following: document, window, or an HTMLElement!");
                 }
             },
-            onFrameDragEnter: React.PropTypes.func,
-            onFrameDragLeave: React.PropTypes.func,
-            onFrameDrop: React.PropTypes.func
+            onFrameDragEnter: PropTypes.func,
+            onFrameDragLeave: PropTypes.func,
+            onFrameDrop: PropTypes.func
         },
 
         getDefaultProps: function () {

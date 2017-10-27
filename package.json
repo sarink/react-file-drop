@@ -34,6 +34,8 @@
     },
     "homepage": "https://github.com/sarink/react-file-drop#readme",
     "dependencies": {
+        "create-react-class": "^15.5.2",
+        "prop-types": "^15.5.8"
     },
     "peerDependencies": {
         "react": ">=0.13"
