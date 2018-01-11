@@ -105,7 +105,6 @@
                 this.resetDragging();
                 if (this.props.onFrameDrop) this.props.onFrameDrop(event);
             }
-            this._handleDrop(event);
         },
 
         render: function () {
