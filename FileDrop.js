@@ -24,6 +24,7 @@
             onDragLeave: PropTypes.func,
             dropEffect: PropTypes.oneOf(["copy", "move", "link", "none"]),
             targetAlwaysVisible: PropTypes.bool,
+            disableDoubleDrop: PropTypes.bool,
             frame: function (props, propName, componentName) {
                 var prop = props[propName];
                 if (prop == null) {
@@ -42,7 +43,8 @@
             return {
                 dropEffect: "copy",
                 frame: document,
-                targetAlwaysVisible: false
+                targetAlwaysVisible: false,
+                disableDoubleDrop: false
             };
         },
 
@@ -104,6 +106,9 @@
             if (!this.state.draggingOverTarget) {
                 this.resetDragging();
                 if (this.props.onFrameDrop) this.props.onFrameDrop(event);
+            }
+            if(!this.props.disableDoubleDrop){
+                this._handleDrop(event);
             }
         },
 
