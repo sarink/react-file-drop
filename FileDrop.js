@@ -64,16 +64,20 @@
             }
         },
 
+        _isIE: (navigator.userAgent.indexOf('MSIE')!==-1 || navigator.appVersion.indexOf('Trident/') > 0),
+
         _handleDragOver: function (event) {
             event.preventDefault();
             event.stopPropagation();
-            event.dataTransfer.dropEffect = this.props.dropEffect;
+            if (!this._isIE) {
+                event.dataTransfer.dropEffect = this.props.dropEffect;
 
-            // set active drag state only when file is dragged into
-            // (in mozilla when file is dragged effect is "uninitialized")
-            var effectAllowed = event.dataTransfer.effectAllowed;
-            if (effectAllowed === "all" || effectAllowed === "uninitialized") {
-                this.setState({draggingOverTarget: true});
+                // set active drag state only when file is dragged into
+                // (in mozilla when file is dragged effect is "uninitialized")
+                var effectAllowed = event.dataTransfer.effectAllowed;
+                if (effectAllowed === "all" || effectAllowed === "uninitialized") {
+                    this.setState({draggingOverTarget: true});
+                }
             }
 
             if (this.props.onDragOver) this.props.onDragOver(event);
