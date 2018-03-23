@@ -58,7 +58,7 @@ By default, the component comes with no styles. You can grab the [demo CSS](http
 ##### .file-drop
 The outer container element
 
-##### .file-drop > file-drop-target
+##### .file-drop > .file-drop-target
 This is the target the user has to drag their files to. It will be inserted into the DOM whenever the user starts dragging over the frame, or if you set ``targetAlwaysVisible={true}``
 
 ##### .file-drop > .file-drop-target.file-drop-dragging-over-frame
