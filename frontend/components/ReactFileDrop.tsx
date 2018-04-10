@@ -34,11 +34,11 @@ class ReactFileDrop extends React.PureComponent<IProps, IState> {
     targetAlwaysVisible: false,
   };
 
-  dragCount: number;
+  frameDragCounter: number;
 
   constructor(props:IProps) {
     super(props);
-    this.dragCount = 0;
+    this.frameDragCounter = 0;
     this.state = {
       draggingOverFrame: false,
       draggingOverTarget: false,
@@ -67,8 +67,27 @@ class ReactFileDrop extends React.PureComponent<IProps, IState> {
   // };
 
   resetDragging = () => {
-    this.dragCount = 0;
+    this.frameDragCounter = 0;
     this.setState({ draggingOverFrame: false, draggingOverTarget: false });
+  }
+
+  handleDragStart = (event:TDivDragEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    event.dataTransfer.effectAllowed = this.props.dropEffect;
+  }
+
+  handleDragOver = (event:TDivDragEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    this.setState({ draggingOverTarget: true });
+    if (!ReactFileDrop.isIE()) event.dataTransfer.dropEffect = this.props.dropEffect;
+    if (this.props.onDragOver) this.props.onDragOver(event);
+  }
+
+  handleDragLeave = (event:TDivDragEvent) => {
+    this.setState({ draggingOverTarget: false });
+    if (this.props.onDragLeave) this.props.onDragLeave(event);
   }
 
   handleDrop = (event:TDivDragEvent) => {
@@ -80,48 +99,22 @@ class ReactFileDrop extends React.PureComponent<IProps, IState> {
     }
   }
 
-
-  handleDragOver = (event:TDivDragEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    event.dataTransfer.dropEffect = this.props.dropEffect;
-
-    /*
-    if (!ReactFileDrop.isIE()) {
-      // set active drag state only when file is dragged into
-      // (in mozilla when file is dragged effect is "uninitialized")
-      const effectAllowed = event.dataTransfer.effectAllowed;
-      if (effectAllowed === 'all' || effectAllowed === 'uninitialized') {
-        this.setState({ draggingOverTarget: true });
-      }
-    }
-    */
-
-    this.setState({ draggingOverTarget: true });
-    if (this.props.onDragOver) this.props.onDragOver(event);
-  }
-
-  handleDragLeave = (event:TDivDragEvent) => {
-    this.setState({ draggingOverTarget: false });
-    if (this.props.onDragLeave) this.props.onDragLeave(event);
-  }
-
   handleFrameDrag = (event:Event) => {
     // We are listening for events on the 'frame', so every time the user drags over any element in the frame's tree,
     // the event bubbles up to the frame. By keeping count of how many "dragenters" we get, we can tell if they are still
     // "draggingOverFrame" (b/c you get one "dragenter" initially, and one "dragenter"/one "dragleave" for every bubble)
-    this.dragCount += (event.type === 'dragenter' ? 1 : -1);
-    if (this.dragCount === 1) {
-      if (this.props.onFrameDragEnter) {
-        if (this.props.onFrameDragEnter(event) === false) {
-          return;
-        }
-      }
+    this.frameDragCounter += (event.type === 'dragenter' ? 1 : -1);
+
+    if (this.frameDragCounter === 1) {
       this.setState({ draggingOverFrame: true });
-    } else if (this.dragCount === 0) {
-      if (this.props.onFrameDragLeave) this.props.onFrameDragLeave(event);
+      if (this.props.onFrameDragLeave) this.props.onFrameDragEnter(event);
+      return;
+    }
+
+    if (this.frameDragCounter === 0) {
       this.setState({ draggingOverFrame: false });
+      if (this.props.onFrameDragLeave) this.props.onFrameDragLeave(event);
+      return;
     }
   }
 
@@ -180,7 +173,13 @@ class ReactFileDrop extends React.PureComponent<IProps, IState> {
     }
 
     return (
-      <div className={className} onDrop={this.handleDrop} onDragLeave={this.handleDragLeave} onDragOver={this.handleDragOver}>
+      <div
+        className={className}
+        onDragStart={this.handleDragStart}
+        onDragOver={this.handleDragOver}
+        onDragLeave={this.handleDragLeave}
+        onDrop={this.handleDrop}
+       >
         <div className={fileDropTargetClassName}>
           {this.props.children}
         </div>
