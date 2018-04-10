@@ -8,6 +8,7 @@ import ReactFileDrop, { TDivDragEvent } from 'components/ReactFileDrop';
 const AppWrapper = (props:any) => (<div id="react-hot-loader-wrapper" {...props}>{props.children}</div>);
 const HotAppWrapper = hot(module)(AppWrapper);
 
+
 class Demo extends React.PureComponent {
   handleFileDrop = (files:FileList, event:TDivDragEvent) => {
     console.log(files, event);
