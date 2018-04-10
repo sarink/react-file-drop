@@ -2,14 +2,33 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { hot } from 'react-hot-loader';
 
-// import 'styles/globalStyles.scss';
-import ReactFileDrop from 'components/ReactFileDrop';
+import 'styles/demoStyles.css';
+import ReactFileDrop, { TDivDragEvent } from 'components/ReactFileDrop';
 
-const AppWrapper = (props:any) => (<div {...props}>{props.children}</div>);
+const AppWrapper = (props:any) => (<div id="react-hot-loader-wrapper" {...props}>{props.children}</div>);
 const HotAppWrapper = hot(module)(AppWrapper);
+
+class Demo extends React.PureComponent {
+  handleFileDrop = (files:FileList, event:TDivDragEvent) => {
+    console.log(files, event);
+  }
+
+  render() {
+    var styles = { border: '1px solid black', width: 600, color: 'black', padding: 20 };
+    return (
+      <div id="react-file-drop-demo" style={styles}>
+        <ReactFileDrop onDrop={this.handleFileDrop}>
+          Drop some files here!
+        </ReactFileDrop>
+      </div>
+    );
+  }
+}
+
+
 const content = (
   <HotAppWrapper>
-    <ReactFileDrop />
+    <Demo />
   </HotAppWrapper>
 );
 
