@@ -1,9 +1,1 @@
-# Ignore IntelliJ
-.idea/**
-
-# Ignore Mac OS files
 .DS_Store
-
-# Do not ignore node_modules!
-# we need these for the gh-pages branch and this is the easiest way, for now
-# node_modules/**
