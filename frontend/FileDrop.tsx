@@ -70,6 +70,7 @@ class FileDrop extends React.PureComponent<IProps, IState> {
   }
 
   handleWindowDragOverOrDrop = (event:DragEvent) => {
+    // This prevents the browser from trying to load whatever file the user dropped on the window
     event.preventDefault();
   }
 
