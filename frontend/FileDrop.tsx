@@ -167,10 +167,8 @@ class FileDrop extends React.PureComponent<IProps, IState> {
     if (this.props.className) className += ' ' + this.props.className;
 
     let fileDropTargetClassName = 'file-drop-target';
-    if (this.state.draggingOverFrame) {
-      if (this.state.draggingOverFrame) fileDropTargetClassName += ' file-drop-dragging-over-frame';
-      if (this.state.draggingOverTarget) fileDropTargetClassName += ' file-drop-dragging-over-target';
-    }
+    if (this.state.draggingOverFrame) fileDropTargetClassName += ' file-drop-dragging-over-frame';
+    if (this.state.draggingOverTarget) fileDropTargetClassName += ' file-drop-dragging-over-target';
 
     return (
       <div
