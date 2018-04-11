@@ -46,7 +46,6 @@ class FileDrop extends React.PureComponent<IProps, IState> {
     onDragLeave: PropTypes.func,
     onDrop: PropTypes.func,
     dropEffect: PropTypes.oneOf(["copy", "move", "link", "none"]),
-    disableDoubleDrop: PropTypes.bool,
     frame: function(props:any, propName:any, componentName:any) {
       const prop = props[propName];
       if (prop == null) {
