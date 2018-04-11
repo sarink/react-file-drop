@@ -17,9 +17,7 @@ You can grab the [demo CSS](http://sarink.github.io/react-file-drop/demo.css) to
 ✅ IE Edge <br/>
 
 ## Typescript?
-Yup!
-
-For event handlers, you can use the
+Yup! (For typing event handlers, use the native DragEvent for frame handlers, and the React lib's DragEvent for others)
 
 ## Why?
 I wanted that behavior like facebook, gmail, etc. have where a part of the page highlights immediately when you start dragging a file anywhere on the window. I couldn't find any React component that already did this, so, I made one.
