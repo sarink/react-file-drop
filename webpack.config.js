@@ -2,6 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const process = require('process');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
@@ -21,6 +22,7 @@ const sharedPlugins = [
     template: './demo.html',
     inject: true,
   }),
+  new CleanWebpackPlugin(path.resolve(__dirname, distDirName)),
 ];
 const prodPlugins = [
   ...sharedPlugins,
