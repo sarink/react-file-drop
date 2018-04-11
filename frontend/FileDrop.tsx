@@ -116,8 +116,8 @@ class FileDrop extends React.PureComponent<IProps, IState> {
     if (this.props.onDrop) {
       const files = (event.dataTransfer) ? event.dataTransfer.files : null; // (event.frame) ? event.frame.files : undefined;
       this.props.onDrop(files, event);
-      this.resetDragging();
     }
+    this.resetDragging();
   }
 
   stopFrameListeners = (frame:IProps['frame']) => {
