@@ -78,6 +78,7 @@ class FileDrop extends React.PureComponent<IProps, IState> {
     // We are listening for events on the 'frame', so every time the user drags over any element in the frame's tree,
     // the event bubbles up to the frame. By keeping count of how many "dragenters" we get, we can tell if they are still
     // "draggingOverFrame" (b/c you get one "dragenter" initially, and one "dragenter"/one "dragleave" for every bubble)
+    // This is far better than a "dragover" handler, which would be calling `setState` continuously.
     this.frameDragCounter += (event.type === 'dragenter' ? 1 : -1);
 
     if (this.frameDragCounter === 1) {
