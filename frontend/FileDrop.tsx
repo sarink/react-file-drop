@@ -7,12 +7,12 @@ export type TDropEffects = 'copy' | 'move' | 'link' | 'none';
 interface IProps {
   className?: string;
   frame?: HTMLElement | Document;
-  onFrameDragEnter?: (event:DragEvent) => void;
-  onFrameDragLeave?: (event:DragEvent) => void;
+  onFrameDragEnter?: (event:DragEvent) => any;
+  onFrameDragLeave?: (event:DragEvent) => any;
   onFrameDrop?: (event:DragEvent) => void;
-  onDrop?: (files:FileList, event:ReactDragEvent<HTMLDivElement>) => any;
   onDragOver?: ReactDragEventHandler<HTMLDivElement>;
   onDragLeave?: ReactDragEventHandler<HTMLDivElement>;
+  onDrop?: (files:FileList, event:ReactDragEvent<HTMLDivElement>) => any;
   dropEffect?: TDropEffects;
   targetAlwaysVisible?: boolean;
 }
@@ -44,9 +44,9 @@ class FileDrop extends React.PureComponent<IProps, IState> {
   }
 
   static propTypes = {
-    onDrop: PropTypes.func,
     onDragOver: PropTypes.func,
     onDragLeave: PropTypes.func,
+    onDrop: PropTypes.func,
     dropEffect: PropTypes.oneOf(["copy", "move", "link", "none"]),
     targetAlwaysVisible: PropTypes.bool,
     disableDoubleDrop: PropTypes.bool,
