@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { hot } from 'react-hot-loader';
 
-import 'styles/demoStyles.css';
-import ReactFileDrop, { TDivDragEvent } from 'components/ReactFileDrop';
+import './demoStyles.css';
+import ReactFileDrop, { TDivDragEvent } from './ReactFileDrop';
 
 const AppWrapper = (props:any) => (<div id="react-hot-loader-wrapper" {...props}>{props.children}</div>);
 const HotAppWrapper = hot(module)(AppWrapper);
