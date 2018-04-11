@@ -100,12 +100,6 @@ class FileDrop extends React.PureComponent<IProps, IState> {
     }
   }
 
-  handleDragStart:ReactDragEventHandler<HTMLDivElement> = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    event.dataTransfer.effectAllowed = this.props.dropEffect;
-  }
-
   handleDragOver:ReactDragEventHandler<HTMLDivElement> = (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -174,7 +168,6 @@ class FileDrop extends React.PureComponent<IProps, IState> {
     return (
       <div
         className={className}
-        onDragStart={this.handleDragStart}
         onDragOver={this.handleDragOver}
         onDragLeave={this.handleDragLeave}
         onDrop={this.handleDrop}
