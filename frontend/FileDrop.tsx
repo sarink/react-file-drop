@@ -21,25 +21,10 @@ interface IState {
 }
 
 class FileDrop extends React.PureComponent<IProps, IState> {
-  static isIE = () => (
-    (window && ((window.navigator.userAgent.indexOf('MSIE') !== -1) || (window.navigator.appVersion.indexOf('Trident/') > 0)))
-  )
-
   static defaultProps = {
     dropEffect: ('copy' as TDropEffects),
     frame: window ? window.document : undefined,
   };
-
-  frameDragCounter: number;
-
-  constructor(props:IProps) {
-    super(props);
-    this.frameDragCounter = 0;
-    this.state = {
-      draggingOverFrame: false,
-      draggingOverTarget: false,
-    };
-  }
 
   static propTypes = {
     onDragOver: PropTypes.func,
@@ -59,6 +44,18 @@ class FileDrop extends React.PureComponent<IProps, IState> {
     onFrameDragLeave: PropTypes.func,
     onFrameDrop: PropTypes.func
   };
+
+  frameDragCounter: number;
+
+  constructor(props:IProps) {
+    super(props);
+    this.frameDragCounter = 0;
+    this.state = { draggingOverFrame: false, draggingOverTarget: false };
+  }
+
+  static isIE = () => (
+    (window && ((window.navigator.userAgent.indexOf('MSIE') !== -1) || (window.navigator.appVersion.indexOf('Trident/') > 0)))
+  )
 
   static eventHasFiles = (event:DragEvent | ReactDragEvent<HTMLElement>) => {
     // In most browsers this is an array, but in IE11 it's an Object :(
