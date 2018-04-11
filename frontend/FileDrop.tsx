@@ -113,7 +113,6 @@ class FileDrop extends React.PureComponent<IProps, IState> {
   }
 
   handleDrop:ReactDragEventHandler<HTMLDivElement> = (event) => {
-    event.preventDefault();
     if (this.props.onDrop) {
       const files = (event.dataTransfer) ? event.dataTransfer.files : null; // (event.frame) ? event.frame.files : undefined;
       this.props.onDrop(files, event);
