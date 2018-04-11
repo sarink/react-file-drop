@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  frontend:
+    build: ./
+    command: bash -c "npm install && npm run build:prod"
+    volumes:
+      - ./:/react-file-drop
