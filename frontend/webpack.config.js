@@ -33,7 +33,7 @@ const devPlugins = [
 ];
 
 const prodEntry = { demo: ['demo.tsx'] };
-const devEntry = { ...prodEntry, ReactFileDrop: ['ReactFileDrop.tsx'] };
+const devEntry = { ...prodEntry, FileDrop: ['FileDrop.tsx'] };
 
 const rhlBabelLoader = {
   loader: 'babel-loader',

@@ -23,7 +23,7 @@ interface IState {
   draggingOverTarget: boolean;
 }
 
-class ReactFileDrop extends React.PureComponent<IProps, IState> {
+class FileDrop extends React.PureComponent<IProps, IState> {
   static isIE = () => (
     (window && ((window.navigator.userAgent.indexOf('MSIE') !== -1) || (window.navigator.appVersion.indexOf('Trident/') > 0)))
   )
@@ -81,7 +81,7 @@ class ReactFileDrop extends React.PureComponent<IProps, IState> {
     event.preventDefault();
     event.stopPropagation();
     this.setState({ draggingOverTarget: true });
-    if (!ReactFileDrop.isIE()) event.dataTransfer.dropEffect = this.props.dropEffect;
+    if (!FileDrop.isIE()) event.dataTransfer.dropEffect = this.props.dropEffect;
     if (this.props.onDragOver) this.props.onDragOver(event);
   }
 
@@ -188,4 +188,4 @@ class ReactFileDrop extends React.PureComponent<IProps, IState> {
   }
 }
 
-export default ReactFileDrop;
+export default FileDrop;

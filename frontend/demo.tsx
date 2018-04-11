@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { hot } from 'react-hot-loader';
 
-import ReactFileDrop, { TDivDragEvent } from './ReactFileDrop';
+import FileDrop, { TDivDragEvent } from './FileDrop';
 
 import './demo.css';
 
@@ -18,9 +18,9 @@ class Demo extends React.PureComponent {
     var styles = { border: '1px solid black', width: 600, color: 'black', padding: 20 };
     return (
       <div id="react-file-drop-demo" style={styles}>
-        <ReactFileDrop onDrop={this.handleFileDrop}>
+        <FileDrop onDrop={this.handleFileDrop}>
           Drop some files here!
-        </ReactFileDrop>
+        </FileDrop>
       </div>
     );
   }
