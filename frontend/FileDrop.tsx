@@ -7,8 +7,8 @@ export type TDropEffects = 'copy' | 'move' | 'link' | 'none';
 interface IProps {
   className?: string;
   frame?: HTMLElement | Document;
-  onFrameDragEnter?: (event:DragEvent) => any;
-  onFrameDragLeave?: (event:DragEvent) => any;
+  onFrameDragEnter?: (event:DragEvent) => void;
+  onFrameDragLeave?: (event:DragEvent) => void;
   onFrameDrop?: (event:DragEvent) => void;
   onDragOver?: ReactDragEventHandler<HTMLDivElement>;
   onDragLeave?: ReactDragEventHandler<HTMLDivElement>;
@@ -81,24 +81,14 @@ class FileDrop extends React.PureComponent<IProps, IState> {
     this.frameDragCounter += (event.type === 'dragenter' ? 1 : -1);
 
     if (this.frameDragCounter === 1) {
-      if (this.props.onFrameDragEnter) {
-        // Allow the consumer to "cancel" an event by returning false
-        if (this.props.onFrameDragEnter(event) === false) {
-          return;
-        }
-        this.setState({ draggingOverFrame: true });
-      }
+      this.setState({ draggingOverFrame: true });
+      if (this.props.onFrameDragEnter) this.props.onFrameDragEnter(event)
       return;
     }
 
     if (this.frameDragCounter === 0) {
-      if (this.props.onFrameDragLeave) {
-        // Allow the consumer to "cancel" an event by returning false
-        if (this.props.onFrameDragLeave(event) === false) {
-          return;
-        }
-        this.setState({ draggingOverFrame: false });
-      }
+      this.setState({ draggingOverFrame: false });
+      if (this.props.onFrameDragLeave) this.props.onFrameDragLeave(event);
       return;
     }
   }
