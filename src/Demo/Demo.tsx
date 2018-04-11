@@ -1,15 +1,11 @@
 import React, { DragEvent as ReactDragEvent, DragEventHandler as ReactDragEventHandler } from 'react';
 import ReactDOM from 'react-dom';
-import { hot } from 'react-hot-loader';
 
-import FileDrop from './FileDrop';
+import FileDrop from 'src/FileDrop/FileDrop';
 
-import './demo.css';
+import './Demo.css';
 
-const AppWrapper = (props:any) => (<div id="react-hot-loader-wrapper" {...props}>{props.children}</div>);
-const HotAppWrapper = hot(module)(AppWrapper);
-
-class Demo extends React.PureComponent {
+class Demo extends React.Component {
   // handleFrameDragEnter = (event:DragEvent) => {
   //   console.log('handleFrameDragEnter', event);
   // }
@@ -46,11 +42,6 @@ class Demo extends React.PureComponent {
   }
 }
 
-const content = (
-  <HotAppWrapper>
-    <Demo />
-  </HotAppWrapper>
-);
-
 const dest = document.getElementById('root');
+const content = <Demo />;
 ReactDOM.render(content, dest);

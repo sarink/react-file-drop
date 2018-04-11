@@ -4,7 +4,7 @@ React component for Gmail or Facebook -like drag and drop file uploader. Drag fi
 ## V2 is out! See the [changelog](https://github.com/sarink/react-file-drop/blob/master/CHANGELOG.md) before upgrading
 
 ## Demo/Example
-http://sarink.github.io/react-file-drop/dist/demo.html - A very simple demo with example code and sample CSS
+http://sarink.github.io/react-file-drop/dist/Demo - A very simple demo with example code and sample CSS
 
 ## By default, there are no styles! You must include some CSS if you want to see anything!
 You can grab the [demo CSS](http://sarink.github.io/react-file-drop/demo.css) to get started
@@ -45,11 +45,7 @@ Callback when the user is dragging over the target. Also adds the ``file-drop-dr
 Callback when the user leaves the target. Removes the ``file-drop-dragging-over-target`` class from the ``file-drop-target``
 
 ##### dropEffect - String "copy" || "move" || "link" || "none" (default: "copy")
-Learn more about [HTML5 dropEffects](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer#dropEffect.28.29) <br/>
-Not available in IE :(
-
-##### targetAlwaysVisible - Boolean (default: false)
-If you'd like the ``file-drop-target`` div to always be visible (otherwise, it's only visible when the user begins dragging over the ``frame``)
+Learn more about [HTML5 dropEffects](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer#dropEffect.28.29). Not available in IE :(
 
 ##### frame - document || HTMLElement  (default: document)
 This is the "scope" or frame that the user must drag some file(s) over to kick things off.

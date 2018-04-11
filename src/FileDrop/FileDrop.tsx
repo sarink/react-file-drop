@@ -4,7 +4,7 @@ import React, { DragEvent as ReactDragEvent, DragEventHandler as ReactDragEventH
 
 export type TDropEffects = 'copy' | 'move' | 'link' | 'none';
 
-interface IProps {
+export interface IFileDropProps {
   className?: string;
   frame?: HTMLElement | Document;
   onFrameDragEnter?: (event:DragEvent) => void;
@@ -15,12 +15,12 @@ interface IProps {
   onDrop?: (files:FileList, event:ReactDragEvent<HTMLDivElement>) => any;
   dropEffect?: TDropEffects;
 }
-interface IState {
+export interface IFileDropState {
   draggingOverFrame: boolean;
   draggingOverTarget: boolean;
 }
 
-class FileDrop extends React.PureComponent<IProps, IState> {
+class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
   static defaultProps = {
     dropEffect: ('copy' as TDropEffects),
     frame: window ? window.document : undefined,
@@ -47,7 +47,7 @@ class FileDrop extends React.PureComponent<IProps, IState> {
 
   frameDragCounter: number;
 
-  constructor(props:IProps) {
+  constructor(props:IFileDropProps) {
     super(props);
     this.frameDragCounter = 0;
     this.state = { draggingOverFrame: false, draggingOverTarget: false };
@@ -131,19 +131,19 @@ class FileDrop extends React.PureComponent<IProps, IState> {
     this.resetDragging();
   }
 
-  stopFrameListeners = (frame:IProps['frame']) => {
+  stopFrameListeners = (frame:IFileDropProps['frame']) => {
     frame.removeEventListener('dragenter', this.handleFrameDrag);
     frame.removeEventListener('dragleave', this.handleFrameDrag);
     frame.removeEventListener('drop', this.handleFrameDrop);
   }
 
-  startFrameListeners = (frame:IProps['frame']) => {
+  startFrameListeners = (frame:IFileDropProps['frame']) => {
     frame.addEventListener('dragenter', this.handleFrameDrag);
     frame.addEventListener('dragleave', this.handleFrameDrag);
     frame.addEventListener('drop', this.handleFrameDrop);
   }
 
-  componentWillReceiveProps(nextProps:IProps) {
+  componentWillReceiveProps(nextProps:IFileDropProps) {
     if (nextProps.frame !== this.props.frame) {
       this.resetDragging();
       this.stopFrameListeners(this.props.frame);

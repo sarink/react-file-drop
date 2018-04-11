@@ -4,58 +4,23 @@ const path = require('path');
 const process = require('process');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 
 
 const isProd = process.env.NODE_ENV === 'production';
 
-const distDirName = 'dist';
-
-const sharedPlugins = [
-  new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-  }),
-  new HtmlWebpackPlugin({
-    filename: 'demo.html',
-    chunks: ['demo'],
-    template: './demo.html',
-    inject: true,
-  }),
-  new CleanWebpackPlugin(path.resolve(__dirname, distDirName)),
-];
-const prodPlugins = [
-  ...sharedPlugins,
-  new ExtractTextPlugin('[name]-[hash:6].bundle.css'),
-];
-const devPlugins = [
-  ...sharedPlugins,
-  new webpack.HotModuleReplacementPlugin(),
-  new webpack.NamedModulesPlugin(),
-];
-
-const prodEntry = { demo: ['demo.tsx'], FileDrop: ['FileDrop.tsx'] };
-const devEntry = { ...prodEntry };
-
-const rhlBabelLoader = {
-  loader: 'babel-loader',
-  options: {
-    plugins: ['react-hot-loader/babel'],
-  },
-};
-const tsLoader = 'ts-loader';
-const cssLoader = 'css-loader';
-const styleLoader = 'style-loader';
+const distDirName = path.join('dist', 'Demo');
+const demoDirName = path.join('src', 'Demo');
 
 module.exports = {
   context: path.resolve(__dirname),
 
-  entry: isProd ? prodEntry : devEntry,
+  entry: { Demo: [path.join(demoDirName, 'Demo.tsx')] },
 
   output: {
     publicPath: '', // Where you uploaded your bundled files. (Relative to server root)
     path: path.resolve(__dirname, distDirName), // Local disk directory to store all your output files (Absolute path)
-    filename: '[name].bundle.js',
+    filename: '[name]-[hash:6].bundle.js',
   },
 
   module: {
@@ -63,12 +28,12 @@ module.exports = {
       {
         test: /\.(j|t)sx?$/,
         exclude: [path.resolve(__dirname, 'node_modules')],
-        use: isProd ? [tsLoader] : [rhlBabelLoader, tsLoader],
+        use: 'ts-loader',
       },
       {
         test: /\.css$/,
-        include: [path.resolve(__dirname, '')],
-        use: isProd ? ExtractTextPlugin.extract({ use: [cssLoader], fallback: styleLoader }) : [styleLoader, cssLoader],
+        include: [path.resolve(__dirname, demoDirName)],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
@@ -81,11 +46,21 @@ module.exports = {
     ],
   },
 
+  plugins: [
+    isProd ? new CleanWebpackPlugin(path.resolve(__dirname, distDirName)) : new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: path.join(demoDirName, 'index.html'),
+      inject: true,
+    }),
+  ],
+
   devServer: {
     publicPath: '/', // URL path where the webpack files are served from
     contentBase: path.join(__dirname, distDirName), // A directory to serve files non-webpack files from
     host: '0.0.0.0',
-    port: process.env.PORT, // set in docker-compose.yml
+    port: process.env.PORT, // Set in docker-compose.yml
     disableHostCheck: true,
     hot: true,
     inline: true,
@@ -96,7 +71,5 @@ module.exports = {
     },
     historyApiFallback: true,
   },
-
-  plugins: isProd ? prodPlugins : devPlugins,
 };
 /* eslint-enable import/no-commonjs */
