@@ -1,10 +1,10 @@
 # react-file-drop
 React component for Gmail or Facebook -like drag and drop file uploader. Drag files anywhere onto the window (or user defined "frame" prop)! Very extensible, provides many hooks so you can use it to develop any custom behavior that you desire.
 
-## V2 is out! See the [changelog](https://github.com/sarink/react-file-drop/blob/master/README.md) before upgrading
+## V2 is out! See the [changelog](https://github.com/sarink/react-file-drop/blob/master/CHANGELOG.md) before upgrading
 
 ## Demo/Example
-http://sarink.github.io/react-file-drop/demo/ - A very simple demo with example code and sample CSS
+http://sarink.github.io/react-file-drop/dist/demo.html - A very simple demo with example code and sample CSS
 
 ## By default, there are no styles! You must include some CSS if you want to see anything!
 You can grab the [demo CSS](http://sarink.github.io/react-file-drop/demo.css) to get started
