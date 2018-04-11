@@ -53,7 +53,7 @@ module.exports = {
   output: {
     publicPath: '/', // Where you uploaded your bundled files. (Relative to server root)
     path: path.resolve(__dirname, distDirName), // Local disk directory to store all your output files (Absolute path)
-    filename: '[name]-[hash:6].bundle.js',
+    filename: '[name].bundle.js',
   },
 
   module: {
