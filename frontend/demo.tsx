@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { hot } from 'react-hot-loader';
 
-import './demoStyles.css';
 import ReactFileDrop, { TDivDragEvent } from './ReactFileDrop';
+
+import './demo.css';
 
 const AppWrapper = (props:any) => (<div id="react-hot-loader-wrapper" {...props}>{props.children}</div>);
 const HotAppWrapper = hot(module)(AppWrapper);
-
 
 class Demo extends React.PureComponent {
   handleFileDrop = (files:FileList, event:TDivDragEvent) => {
@@ -25,7 +25,6 @@ class Demo extends React.PureComponent {
     );
   }
 }
-
 
 const content = (
   <HotAppWrapper>
