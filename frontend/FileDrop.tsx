@@ -14,7 +14,6 @@ interface IProps {
   onDragLeave?: ReactDragEventHandler<HTMLDivElement>;
   onDrop?: (files:FileList, event:ReactDragEvent<HTMLDivElement>) => any;
   dropEffect?: TDropEffects;
-  targetAlwaysVisible?: boolean;
 }
 interface IState {
   draggingOverFrame: boolean;
@@ -29,7 +28,6 @@ class FileDrop extends React.PureComponent<IProps, IState> {
   static defaultProps = {
     dropEffect: ('copy' as TDropEffects),
     frame: window ? window.document : undefined,
-    targetAlwaysVisible: false,
   };
 
   frameDragCounter: number;
@@ -48,7 +46,6 @@ class FileDrop extends React.PureComponent<IProps, IState> {
     onDragLeave: PropTypes.func,
     onDrop: PropTypes.func,
     dropEffect: PropTypes.oneOf(["copy", "move", "link", "none"]),
-    targetAlwaysVisible: PropTypes.bool,
     disableDoubleDrop: PropTypes.bool,
     frame: function(props:any, propName:any, componentName:any) {
       const prop = props[propName];
@@ -174,7 +171,7 @@ class FileDrop extends React.PureComponent<IProps, IState> {
     if (this.props.className) className += ' ' + this.props.className;
 
     let fileDropTargetClassName = 'file-drop-target';
-    if (this.props.targetAlwaysVisible || this.state.draggingOverFrame) {
+    if (this.state.draggingOverFrame) {
       if (this.state.draggingOverFrame) fileDropTargetClassName += ' file-drop-dragging-over-frame';
       if (this.state.draggingOverTarget) fileDropTargetClassName += ' file-drop-dragging-over-target';
     }
