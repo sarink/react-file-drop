@@ -53,7 +53,7 @@ module.exports = {
   entry: isProd ? prodEntry : devEntry,
 
   output: {
-    publicPath: distDirName, // Where you uploaded your bundled files. (Relative to server root)
+    publicPath: '', // Where you uploaded your bundled files. (Relative to server root)
     path: path.resolve(__dirname, distDirName), // Local disk directory to store all your output files (Absolute path)
     filename: '[name].bundle.js',
   },
