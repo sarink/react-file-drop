@@ -32,8 +32,8 @@ const devPlugins = [
   new webpack.NamedModulesPlugin(),
 ];
 
-const prodEntry = { demo: ['demo.tsx'] };
-const devEntry = { ...prodEntry, FileDrop: ['FileDrop.tsx'] };
+const prodEntry = { demo: ['demo.tsx'], FileDrop: ['FileDrop.tsx'] };
+const devEntry = { ...prodEntry };
 
 const rhlBabelLoader = {
   loader: 'babel-loader',
