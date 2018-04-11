@@ -64,6 +64,19 @@ class FileDrop extends React.PureComponent<IProps, IState> {
     onFrameDrop: PropTypes.func
   };
 
+  static eventHasFiles = (event:DragEvent | ReactDragEvent<HTMLElement>) => {
+    // In most browsers this is an array, but in IE11 it's an Object :(
+    let hasFiles = false;
+    const types = event.dataTransfer.types;
+    for (const keyOrIndex in types) {
+      if (types[keyOrIndex] === 'Files') {
+        hasFiles = true;
+        break;
+      }
+    }
+    return hasFiles;
+  }
+
   resetDragging = () => {
     this.frameDragCounter = 0;
     this.setState({ draggingOverFrame: false, draggingOverTarget: false });
@@ -75,6 +88,9 @@ class FileDrop extends React.PureComponent<IProps, IState> {
   }
 
   handleFrameDrag = (event:DragEvent) => {
+    // Only allow dragging of files
+    if (!FileDrop.eventHasFiles(event)) return;
+
     // We are listening for events on the 'frame', so every time the user drags over any element in the frame's tree,
     // the event bubbles up to the frame. By keeping count of how many "dragenters" we get, we can tell if they are still
     // "draggingOverFrame" (b/c you get one "dragenter" initially, and one "dragenter"/one "dragleave" for every bubble)
@@ -113,8 +129,8 @@ class FileDrop extends React.PureComponent<IProps, IState> {
   }
 
   handleDrop:ReactDragEventHandler<HTMLDivElement> = (event) => {
-    if (this.props.onDrop) {
-      const files = (event.dataTransfer) ? event.dataTransfer.files : null; // (event.frame) ? event.frame.files : undefined;
+    if (this.props.onDrop && FileDrop.eventHasFiles(event)) {
+      const files = (event.dataTransfer) ? event.dataTransfer.files : null;
       this.props.onDrop(files, event);
     }
     this.resetDragging();
