@@ -102,8 +102,6 @@ class FileDrop extends React.PureComponent<IProps, IState> {
   }
 
   handleDragOver:ReactDragEventHandler<HTMLDivElement> = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
     this.setState({ draggingOverTarget: true });
     if (!FileDrop.isIE()) event.dataTransfer.dropEffect = this.props.dropEffect;
     if (this.props.onDragOver) this.props.onDragOver(event);
