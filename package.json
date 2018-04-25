@@ -1,9 +1,10 @@
 {
   "name": "react-file-drop",
   "author": "https://sarink.net",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "React component for Gmail or Facbook -like drag and drop file uploader. Drag files anywhere onto the window to highlight a 'drop area' of the page",
-  "main": "dist/FileDrop/FileDrop",
+  "main": "dist/FileDrop/FileDrop.js",
+  "types": "dist/FileDrop/FileDrop.d.ts",
   "scripts": {
     "start:dev": "webpack-dev-server",
     "build:filedrop": "tsc --project src/FileDrop",
