@@ -14,6 +14,8 @@ export interface IFileDropProps {
   onDragLeave?: ReactDragEventHandler<HTMLDivElement>;
   onDrop?: (files:FileList, event:ReactDragEvent<HTMLDivElement>) => any;
   dropEffect?: TDropEffects;
+  outerComponent?: any;
+  innerComponent?: any;
 }
 export interface IFileDropState {
   draggingOverFrame: boolean;
@@ -24,9 +26,13 @@ class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
   static defaultProps = {
     dropEffect: ('copy' as TDropEffects),
     frame: window ? window.document : undefined,
+    outerComponent: 'div',
+    innerComponent: 'div',
   };
 
   static propTypes = {
+    outerComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    innerComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     onDragOver: PropTypes.func,
     onDragLeave: PropTypes.func,
     onDrop: PropTypes.func,
@@ -172,17 +178,19 @@ class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
     if (this.state.draggingOverFrame) fileDropTargetClassName += ' file-drop-dragging-over-frame';
     if (this.state.draggingOverTarget) fileDropTargetClassName += ' file-drop-dragging-over-target';
 
+    const OuterComponent = this.props.outerComponent;
+    const InnerComponent = this.props.innerComponent;
     return (
-      <div
+      <OuterComponent
         className={className}
         onDragOver={this.handleDragOver}
         onDragLeave={this.handleDragLeave}
         onDrop={this.handleDrop}
        >
-        <div className={fileDropTargetClassName}>
+        <InnerComponent className={fileDropTargetClassName}>
           {this.props.children}
-        </div>
-      </div>
+        </InnerComponent>
+      </OuterComponent>
     );
   }
 }

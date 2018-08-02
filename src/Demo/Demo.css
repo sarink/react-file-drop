@@ -64,3 +64,18 @@
   color: #ff6e40;
   box-shadow: 0 0 13px 3px #ff6e40;
 }
+
+/* some handling for the SVG demo */
+
+svg {
+  background: ghostwhite;
+}
+
+svg .file-drop > .file-drop-target.file-drop-dragging-over-frame {
+  filter: url(#glow-blue);
+   
+}
+
+svg .file-drop > .file-drop-target.file-drop-dragging-over-target {
+  filter: url(#glow-orange);
+}
