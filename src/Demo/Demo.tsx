@@ -2,6 +2,7 @@ import React, { DragEvent as ReactDragEvent, DragEventHandler as ReactDragEventH
 import ReactDOM from 'react-dom';
 
 import FileDrop from 'src/FileDrop/FileDrop';
+import SvgExample from './SvgExample';
 
 import './Demo.css';
 
@@ -31,12 +32,18 @@ class Demo extends React.Component {
   }
 
   render() {
-    var styles = { border: '1px solid black', width: 600, color: 'black', padding: 20 };
+    var styles = { border: '1px solid black', width: 600, color: 'black', padding: 20, marginBottom: 20 };
     return (
-      <div id="react-file-drop-demo" style={styles}>
+      <div id="react-file-drop-demo">
+        <div style={styles}> 
         <FileDrop onDrop={this.handleDrop}>
           Drop some files here!
         </FileDrop>
+        </div>
+        <div style={styles}>
+          Works with SVG too - drop files on the shapes
+          <SvgExample onDrop={this.handleDrop} />
+        </div>
       </div>
     );
   }
