@@ -14,7 +14,7 @@
       "options": [
         { "propTypes": "PropTypes" },
         { "react": "React" },
-        { "reactDom": "ReactDOM "},
+        { "reactDom": "ReactDOM"},
         { "reactDatepicker": "ReactDatePicker" },
         { "reactModal": "ReactModal" },
         { "reactQuerybuilder": "ReactQueryBuilder" },
