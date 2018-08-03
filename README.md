@@ -79,10 +79,12 @@ Your PRs are welcome! To run the app locally:
 
 Run `docker-compose up` - this will launch a node docker container, and execute `npm run start:dev`, which will launch the demo app at `http://localhost:3003` (you can change the port number inside `docker-compose.yml`)
 
-If you're not into docker, you can also just execute `PORT=3003 npm run start:dev` (you can use whatever port number is your favorite, but `webpack.config.js` expects `process.env.PORT` to be defined)
+Once the docker container is running and started...
 
-If you made changes to the Demo app, run `npm run build:demo` before you push (this will output new files in `dist/Demo`)
+If you made changes to the Demo app, run `docker-compose exec frontend npm run build:demo` before you push (this will output new files in `dist/Demo`)
 
-If you made changes to the main FileDrop, run `npm run build:filedrop` before you push (this will output new files in `dist/FileDrop`)
+If you made changes to the main FileDrop, run `docker-compose exec frontend npm run build:filedrop` before you push (this will output new files in `dist/FileDrop`)
 
-Note: This repo uses `tslint`, you can run `npm run lint:watch` (or configure your IDE to read the `tslint.json` file)
+Note: This repo uses `tslint`, you can run `docker-compose exec frontend npm run lint:watch` (or configure your IDE to read the `tslint.json` file)
+
+If you're not into docker, you can also just execute `PORT=3003 npm run start:dev` (you can use whatever port number is your favorite, but `webpack.config.js` expects `process.env.PORT` to be defined) and leave off the `docker-compose exec frontend` prefix from the rest of the commands
