@@ -106,7 +106,7 @@ var FileDrop = /** @class */ (function (_super) {
     };
     FileDrop.prototype.render = function () {
         var className = 'file-drop';
-        if (this.props.className)
+        if (this.props.className != null)
             className += ' ' + this.props.className;
         var fileDropTargetClassName = 'file-drop-target';
         if (this.state.draggingOverFrame)
@@ -124,19 +124,19 @@ var FileDrop = /** @class */ (function (_super) {
         onDragOver: PropTypes.func,
         onDragLeave: PropTypes.func,
         onDrop: PropTypes.func,
-        dropEffect: PropTypes.oneOf(["copy", "move", "link", "none"]),
+        dropEffect: PropTypes.oneOf(['copy', 'move', 'link', 'none']),
         frame: function (props, propName, componentName) {
             var prop = props[propName];
             if (prop == null) {
-                return new Error("Warning: Required prop `" + propName + "` was not specified in `" + componentName + "`");
+                return new Error('Warning: Required prop `' + propName + '` was not specified in `' + componentName + '`');
             }
             if (prop !== document && prop !== window && !(prop instanceof HTMLElement)) {
-                return new Error("Warning: Prop `" + propName + "` must be one of the following: document, HTMLElement!");
+                return new Error('Warning: Prop `' + propName + '` must be one of the following: document, HTMLElement!');
             }
         },
         onFrameDragEnter: PropTypes.func,
         onFrameDragLeave: PropTypes.func,
-        onFrameDrop: PropTypes.func
+        onFrameDrop: PropTypes.func,
     };
     FileDrop.isIE = function () { return ((window && ((window.navigator.userAgent.indexOf('MSIE') !== -1) || (window.navigator.appVersion.indexOf('Trident/') > 0)))); };
     FileDrop.eventHasFiles = function (event) {
