@@ -70,7 +70,6 @@
     },
     "no-unused-variable": true,
     "object-curly-spacing": [true, "always"],
-    "object-shorthand-properties-first": true,
     "ordered-imports": [true, { "grouped-imports": true, "module-source-path": "full" }],
     "max-line-length": [true, 130],
     "prefer-const": true,
