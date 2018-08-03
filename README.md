@@ -73,3 +73,16 @@ The ``file-drop-dragging-over-frame`` class will be added to the ``file-drop-tar
 
 ##### .file-drop > .file-drop-target.file-drop-dragging-over-target
 The ``file-drop-dragging-over-target`` class will be added to the ``file-drop-target`` whenever the user begins dragging a file over the ``file-drop-target`` div, and it will be removed when they leave
+
+## Contributing
+Your PRs are welcome! To run the app locally:
+
+Run `docker-compose up` - this will launch a node docker container, and execute `npm run start:dev`, which will launch the demo app at `http://localhost:3003` (you can change the port number inside `docker-compose.yml`)
+
+If you're not into docker, you can also just execute `PORT=3003 npm run start:dev` (you can use whatever port number is your favorite, but `webpack.config.js` expects `process.env.PORT` to be defined)
+
+If you made changes to the Demo app, run `npm run build:demo` before you push (this will output new files in `dist/Demo`)
+
+If you made changes to the main FileDrop, run `npm run build:filedrop` before you push (this will output new files in `dist/FileDrop`)
+
+Note: This repo uses `tslint`, you can run `npm run lint:watch` (or configure your IDE to read the `tslint.json` file)
