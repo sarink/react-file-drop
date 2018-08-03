@@ -9,9 +9,9 @@
     "start:dev": "webpack-dev-server",
     "build:filedrop": "tsc --project src/FileDrop",
     "build:demo": "NODE_ENV=production webpack -p",
-    "lint": "tslint --project src",
-    "lint:watch": "SHELL=/bin/bash chokidar webpack.config.* tslint.json tsconfig.json ./**/*.ts ./**/*.tsx -c \"npm run lint\" --initial --verbose",
-    "lint:fix": "tslint --project . --fix"
+    "lint": "tslint --project src/FileDrop --project src/Demo",
+    "lint:watch": "SHELL=/bin/bash chokidar webpack.config.* tslint.json tsconfig.json src/Demo/*.tsx src/FileDrop/*.tsx -c \"npm run lint\" --initial --verbose",
+    "lint:fix": "tslint --project src/FileDrop --fix --project src/Demo --fix"
   },
   "keywords": [
     "react file gmail",
