@@ -1,4 +1,4 @@
-import React, { DragEvent as ReactDragEvent, DragEventHandler as ReactDragEventHandler } from 'react';
+import React, { DragEvent as ReactDragEvent } from 'react';
 import ReactDOM from 'react-dom';
 
 import FileDrop from 'src/FileDrop/FileDrop';

@@ -30,19 +30,19 @@ class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
     onDragOver: PropTypes.func,
     onDragLeave: PropTypes.func,
     onDrop: PropTypes.func,
-    dropEffect: PropTypes.oneOf(["copy", "move", "link", "none"]),
-    frame: function(props:any, propName:any, componentName:any) {
+    dropEffect: PropTypes.oneOf(['copy', 'move', 'link', 'none']),
+    frame: (props:any, propName:any, componentName:any) => {
       const prop = props[propName];
       if (prop == null) {
-        return new Error("Warning: Required prop `" + propName + "` was not specified in `" + componentName + "`");
+        return new Error('Warning: Required prop `' + propName + '` was not specified in `' + componentName + '`');
       }
       if (prop !== document && prop !== window && !(prop instanceof HTMLElement)) {
-        return new Error("Warning: Prop `" + propName + "` must be one of the following: document, HTMLElement!");
+        return new Error('Warning: Prop `' + propName + '` must be one of the following: document, HTMLElement!');
       }
     },
     onFrameDragEnter: PropTypes.func,
     onFrameDragLeave: PropTypes.func,
-    onFrameDrop: PropTypes.func
+    onFrameDrop: PropTypes.func,
   };
 
   frameDragCounter: number;
@@ -92,7 +92,7 @@ class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
 
     if (this.frameDragCounter === 1) {
       this.setState({ draggingOverFrame: true });
-      if (this.props.onFrameDragEnter) this.props.onFrameDragEnter(event)
+      if (this.props.onFrameDragEnter) this.props.onFrameDragEnter(event);
       return;
     }
 
@@ -110,7 +110,7 @@ class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
     }
   }
 
-  handleDragOver:ReactDragEventHandler<HTMLDivElement> = (event) => {
+  handleDragOver: ReactDragEventHandler<HTMLDivElement> = (event) => {
     if (FileDrop.eventHasFiles(event)) {
       this.setState({ draggingOverTarget: true });
       if (!FileDrop.isIE()) event.dataTransfer.dropEffect = this.props.dropEffect;
@@ -118,12 +118,12 @@ class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
     }
   }
 
-  handleDragLeave:ReactDragEventHandler<HTMLDivElement> = (event) => {
+  handleDragLeave: ReactDragEventHandler<HTMLDivElement> = (event) => {
     this.setState({ draggingOverTarget: false });
     if (this.props.onDragLeave) this.props.onDragLeave(event);
   }
 
-  handleDrop:ReactDragEventHandler<HTMLDivElement> = (event) => {
+  handleDrop: ReactDragEventHandler<HTMLDivElement> = (event) => {
     if (this.props.onDrop && FileDrop.eventHasFiles(event)) {
       const files = (event.dataTransfer) ? event.dataTransfer.files : null;
       this.props.onDrop(files, event);
@@ -166,7 +166,7 @@ class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
 
   render() {
     let className = 'file-drop';
-    if (this.props.className) className += ' ' + this.props.className;
+    if (this.props.className != null) className += ' ' + this.props.className;
 
     let fileDropTargetClassName = 'file-drop-target';
     if (this.state.draggingOverFrame) fileDropTargetClassName += ' file-drop-dragging-over-frame';
