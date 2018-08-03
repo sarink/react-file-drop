@@ -12,6 +12,8 @@ export interface IFileDropProps {
     onDragLeave?: ReactDragEventHandler<HTMLDivElement>;
     onDrop?: (files: FileList, event: ReactDragEvent<HTMLDivElement>) => any;
     dropEffect?: TDropEffects;
+    outerComponent?: any;
+    innerComponent?: any;
 }
 export interface IFileDropState {
     draggingOverFrame: boolean;
@@ -21,8 +23,12 @@ declare class FileDrop extends React.PureComponent<IFileDropProps, IFileDropStat
     static defaultProps: {
         dropEffect: TDropEffects;
         frame: Document;
+        outerComponent: string;
+        innerComponent: string;
     };
     static propTypes: {
+        outerComponent: PropTypes.Requireable<any>;
+        innerComponent: PropTypes.Requireable<any>;
         onDragOver: PropTypes.Requireable<any>;
         onDragLeave: PropTypes.Requireable<any>;
         onDrop: PropTypes.Requireable<any>;

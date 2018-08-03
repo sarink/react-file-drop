@@ -113,14 +113,20 @@ var FileDrop = /** @class */ (function (_super) {
             fileDropTargetClassName += ' file-drop-dragging-over-frame';
         if (this.state.draggingOverTarget)
             fileDropTargetClassName += ' file-drop-dragging-over-target';
-        return (React.createElement("div", { className: className, onDragOver: this.handleDragOver, onDragLeave: this.handleDragLeave, onDrop: this.handleDrop },
-            React.createElement("div", { className: fileDropTargetClassName }, this.props.children)));
+        var OuterComponent = this.props.outerComponent;
+        var InnerComponent = this.props.innerComponent;
+        return (React.createElement(OuterComponent, { className: className, onDragOver: this.handleDragOver, onDragLeave: this.handleDragLeave, onDrop: this.handleDrop },
+            React.createElement(InnerComponent, { className: fileDropTargetClassName }, this.props.children)));
     };
     FileDrop.defaultProps = {
         dropEffect: 'copy',
         frame: window ? window.document : undefined,
+        outerComponent: 'div',
+        innerComponent: 'div',
     };
     FileDrop.propTypes = {
+        outerComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+        innerComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
         onDragOver: PropTypes.func,
         onDragLeave: PropTypes.func,
         onDrop: PropTypes.func,
