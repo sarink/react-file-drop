@@ -31,7 +31,7 @@ class Demo extends React.Component {
   }
 
   render() {
-    var styles = { border: '1px solid black', width: 600, color: 'black', padding: 20 };
+    const styles = { border: '1px solid black', width: 600, color: 'black', padding: 20 };
     return (
       <div id="react-file-drop-demo" style={styles}>
         <FileDrop onDrop={this.handleDrop}>
