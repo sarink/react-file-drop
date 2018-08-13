@@ -1,9 +1,11 @@
-/// <reference types="react" />
 import PropTypes from 'prop-types';
 import React, { DragEvent as ReactDragEvent, DragEventHandler as ReactDragEventHandler } from 'react';
 export declare type TDropEffects = 'copy' | 'move' | 'link' | 'none';
 export interface IFileDropProps {
     className?: string;
+    targetClassName?: string;
+    draggingOverFrameClassName?: string;
+    draggingOverTargetClassName?: string;
     frame?: HTMLElement | Document;
     onFrameDragEnter?: (event: DragEvent) => void;
     onFrameDragLeave?: (event: DragEvent) => void;
@@ -21,16 +23,24 @@ declare class FileDrop extends React.PureComponent<IFileDropProps, IFileDropStat
     static defaultProps: {
         dropEffect: TDropEffects;
         frame: Document;
+        className: string;
+        targetClassName: string;
+        draggingOverFrameClassName: string;
+        draggingOverTargetClassName: string;
     };
     static propTypes: {
-        onDragOver: PropTypes.Requireable<any>;
-        onDragLeave: PropTypes.Requireable<any>;
-        onDrop: PropTypes.Requireable<any>;
-        dropEffect: PropTypes.Requireable<any>;
+        className: PropTypes.Requireable<string>;
+        targetClassName: PropTypes.Requireable<string>;
+        draggingOverFrameClassName: PropTypes.Requireable<string>;
+        draggingOverTargetClassName: PropTypes.Requireable<string>;
+        onDragOver: PropTypes.Requireable<(...args: any[]) => any>;
+        onDragLeave: PropTypes.Requireable<(...args: any[]) => any>;
+        onDrop: PropTypes.Requireable<(...args: any[]) => any>;
+        dropEffect: PropTypes.Requireable<string>;
         frame: (props: any, propName: any, componentName: any) => Error;
-        onFrameDragEnter: PropTypes.Requireable<any>;
-        onFrameDragLeave: PropTypes.Requireable<any>;
-        onFrameDrop: PropTypes.Requireable<any>;
+        onFrameDragEnter: PropTypes.Requireable<(...args: any[]) => any>;
+        onFrameDragLeave: PropTypes.Requireable<(...args: any[]) => any>;
+        onFrameDrop: PropTypes.Requireable<(...args: any[]) => any>;
     };
     frameDragCounter: number;
     constructor(props: IFileDropProps);

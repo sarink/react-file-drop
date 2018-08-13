@@ -105,22 +105,29 @@ var FileDrop = /** @class */ (function (_super) {
         window.removeEventListener('drop', this.handleWindowDragOverOrDrop);
     };
     FileDrop.prototype.render = function () {
-        var className = 'file-drop';
-        if (this.props.className != null)
-            className += ' ' + this.props.className;
-        var fileDropTargetClassName = 'file-drop-target';
-        if (this.state.draggingOverFrame)
-            fileDropTargetClassName += ' file-drop-dragging-over-frame';
-        if (this.state.draggingOverTarget)
-            fileDropTargetClassName += ' file-drop-dragging-over-target';
+        var _a = this.props, children = _a.children, className = _a.className, targetClassName = _a.targetClassName, draggingOverFrameClassName = _a.draggingOverFrameClassName, draggingOverTargetClassName = _a.draggingOverTargetClassName;
+        var _b = this.state, draggingOverTarget = _b.draggingOverTarget, draggingOverFrame = _b.draggingOverFrame;
+        var fileDropTargetClassName = targetClassName;
+        if (draggingOverFrame)
+            fileDropTargetClassName += " " + draggingOverFrameClassName;
+        if (draggingOverTarget)
+            fileDropTargetClassName += " " + draggingOverTargetClassName;
         return (React.createElement("div", { className: className, onDragOver: this.handleDragOver, onDragLeave: this.handleDragLeave, onDrop: this.handleDrop },
             React.createElement("div", { className: fileDropTargetClassName }, this.props.children)));
     };
     FileDrop.defaultProps = {
         dropEffect: 'copy',
         frame: window ? window.document : undefined,
+        className: 'file-drop',
+        targetClassName: 'file-drop-target',
+        draggingOverFrameClassName: 'file-drop-dragging-over-frame',
+        draggingOverTargetClassName: 'file-drop-dragging-over-target'
     };
     FileDrop.propTypes = {
+        className: PropTypes.string,
+        targetClassName: PropTypes.string,
+        draggingOverFrameClassName: PropTypes.string,
+        draggingOverTargetClassName: PropTypes.string,
         onDragOver: PropTypes.func,
         onDragLeave: PropTypes.func,
         onDrop: PropTypes.func,
