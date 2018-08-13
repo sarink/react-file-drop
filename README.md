@@ -59,16 +59,16 @@ Callback when the user stops dragging over the ``frame``
 ##### onFrameDrop - function(event)
 Callback when the user drops files *anywhere* over the ``frame``
 
-#####className - string (default: file-drop)
+##### className - string (default: file-drop)
 Class given to the outer container div.
 
-#####targetClassName - string (default: file-drop-target)
+##### targetClassName - string (default: file-drop-target)
 Class given to the target div.
 
-#####draggingOverFrameClassName - string (default: file-drop-dragging-over-frame)
+##### draggingOverFrameClassName - string (default: file-drop-dragging-over-frame)
 Class given to the target div when file is being dragged over frame.
 
-#####draggingOverTargetClassName - string (default: file-drop-dragging-over-target)
+##### draggingOverTargetClassName - string (default: file-drop-dragging-over-target)
 Class given to the target div when file is being dragged over target.
 
 ## Styling
