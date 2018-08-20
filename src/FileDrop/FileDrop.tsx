@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { DragEvent as ReactDragEvent, DragEventHandler as ReactDragEventHandler } from 'react';
 
-
 export type TDropEffects = 'copy' | 'move' | 'link' | 'none';
 
 export interface IFileDropProps {
@@ -30,7 +29,7 @@ class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
     className: 'file-drop',
     targetClassName: 'file-drop-target',
     draggingOverFrameClassName: 'file-drop-dragging-over-frame',
-    draggingOverTargetClassName: 'file-drop-dragging-over-target'
+    draggingOverTargetClassName: 'file-drop-dragging-over-target',
   };
 
   static propTypes = {
@@ -198,7 +197,7 @@ class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
         onDrop={this.handleDrop}
        >
         <div className={fileDropTargetClassName}>
-          {this.props.children}
+          {children}
         </div>
       </div>
     );

@@ -113,7 +113,7 @@ var FileDrop = /** @class */ (function (_super) {
         if (draggingOverTarget)
             fileDropTargetClassName += " " + draggingOverTargetClassName;
         return (React.createElement("div", { className: className, onDragOver: this.handleDragOver, onDragLeave: this.handleDragLeave, onDrop: this.handleDrop },
-            React.createElement("div", { className: fileDropTargetClassName }, this.props.children)));
+            React.createElement("div", { className: fileDropTargetClassName }, children)));
     };
     FileDrop.defaultProps = {
         dropEffect: 'copy',
@@ -121,7 +121,7 @@ var FileDrop = /** @class */ (function (_super) {
         className: 'file-drop',
         targetClassName: 'file-drop-target',
         draggingOverFrameClassName: 'file-drop-dragging-over-frame',
-        draggingOverTargetClassName: 'file-drop-dragging-over-target'
+        draggingOverTargetClassName: 'file-drop-dragging-over-target',
     };
     FileDrop.propTypes = {
         className: PropTypes.string,
