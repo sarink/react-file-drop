@@ -59,6 +59,18 @@ Callback when the user stops dragging over the ``frame``
 ##### onFrameDrop - function(event)
 Callback when the user drops files *anywhere* over the ``frame``
 
+##### className - string (default: file-drop)
+Class given to the outer container div.
+
+##### targetClassName - string (default: file-drop-target)
+Class given to the target div.
+
+##### draggingOverFrameClassName - string (default: file-drop-dragging-over-frame)
+Class given to the target div when file is being dragged over frame.
+
+##### draggingOverTargetClassName - string (default: file-drop-dragging-over-target)
+Class given to the target div when file is being dragged over target.
+
 ## Styling
 By default, the component comes with no styles. You can grab the [demo CSS](https://raw.githubusercontent.com/sarink/react-file-drop/master/src/Demo/Demo.css) to get you started.
 
@@ -73,6 +85,13 @@ The ``file-drop-dragging-over-frame`` class will be added to the ``file-drop-tar
 
 ##### .file-drop > .file-drop-target.file-drop-dragging-over-target
 The ``file-drop-dragging-over-target`` class will be added to the ``file-drop-target`` whenever the user begins dragging a file over the ``file-drop-target`` div, and it will be removed when they leave
+
+For custom class names you can use the following props:
+
+* className
+* targetClassName
+* draggingOverFrameClassName
+* draggingOverTargetClassName
 
 ## Contributing
 Your PRs are welcome! To run the app locally:
