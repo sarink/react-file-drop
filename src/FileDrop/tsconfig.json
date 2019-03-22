@@ -6,7 +6,11 @@
     "target": "es5",
     "moduleResolution": "node",
     "jsx": "react",
-    "noImplicitAny": true,
+    "noImplicitReturns": false,
+    "noImplicitThis": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
     "allowSyntheticDefaultImports": true,
     "traceResolution": false,
     "declaration": true
