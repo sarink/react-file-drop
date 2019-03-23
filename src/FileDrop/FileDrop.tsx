@@ -14,7 +14,7 @@ export interface IFileDropProps {
   onFrameDrop?: (event:DragEvent) => void;
   onDragOver?: ReactDragEventHandler<HTMLDivElement>;
   onDragLeave?: ReactDragEventHandler<HTMLDivElement>;
-  onDrop?: (files:FileList, event:ReactDragEvent<HTMLDivElement>) => any;
+  onDrop?: (files:FileList | null, event:ReactDragEvent<HTMLDivElement>) => any;
   dropEffect?: TDropEffects;
 }
 export interface IFileDropState {
@@ -138,9 +138,7 @@ class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
   handleDrop: ReactDragEventHandler<HTMLDivElement> = (event) => {
     if (this.props.onDrop && FileDrop.eventHasFiles(event)) {
       const files = (event.dataTransfer) ? event.dataTransfer.files : null;
-      if (files) {
-        this.props.onDrop(files, event);
-      }
+      this.props.onDrop(files, event);
     }
     this.resetDragging();
   }
