@@ -54,7 +54,7 @@ var FileDrop = /** @class */ (function (_super) {
         _this.handleDragOver = function (event) {
             if (FileDrop.eventHasFiles(event)) {
                 _this.setState({ draggingOverTarget: true });
-                if (!FileDrop.isIE())
+                if (!FileDrop.isIE() && _this.props.dropEffect)
                     event.dataTransfer.dropEffect = _this.props.dropEffect;
                 if (_this.props.onDragOver)
                     _this.props.onDragOver(event);
@@ -73,14 +73,18 @@ var FileDrop = /** @class */ (function (_super) {
             _this.resetDragging();
         };
         _this.stopFrameListeners = function (frame) {
-            frame.removeEventListener('dragenter', _this.handleFrameDrag);
-            frame.removeEventListener('dragleave', _this.handleFrameDrag);
-            frame.removeEventListener('drop', _this.handleFrameDrop);
+            if (frame) {
+                frame.removeEventListener('dragenter', _this.handleFrameDrag);
+                frame.removeEventListener('dragleave', _this.handleFrameDrag);
+                frame.removeEventListener('drop', _this.handleFrameDrop);
+            }
         };
         _this.startFrameListeners = function (frame) {
-            frame.addEventListener('dragenter', _this.handleFrameDrag);
-            frame.addEventListener('dragleave', _this.handleFrameDrag);
-            frame.addEventListener('drop', _this.handleFrameDrop);
+            if (frame) {
+                frame.addEventListener('dragenter', _this.handleFrameDrag);
+                frame.addEventListener('dragleave', _this.handleFrameDrag);
+                frame.addEventListener('drop', _this.handleFrameDrop);
+            }
         };
         _this.frameDragCounter = 0;
         _this.state = { draggingOverFrame: false, draggingOverTarget: false };
@@ -149,11 +153,13 @@ var FileDrop = /** @class */ (function (_super) {
     FileDrop.eventHasFiles = function (event) {
         // In most browsers this is an array, but in IE11 it's an Object :(
         var hasFiles = false;
-        var types = event.dataTransfer.types;
-        for (var keyOrIndex in types) {
-            if (types[keyOrIndex] === 'Files') {
-                hasFiles = true;
-                break;
+        if (event.dataTransfer) {
+            var types = event.dataTransfer.types;
+            for (var keyOrIndex in types) {
+                if (types[keyOrIndex] === 'Files') {
+                    hasFiles = true;
+                    break;
+                }
             }
         }
         return hasFiles;

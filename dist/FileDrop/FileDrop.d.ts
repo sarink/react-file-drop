@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import PropTypes from 'prop-types';
 import React, { DragEvent as ReactDragEvent, DragEventHandler as ReactDragEventHandler } from 'react';
 export declare type TDropEffects = 'copy' | 'move' | 'link' | 'none';
@@ -12,7 +13,7 @@ export interface IFileDropProps {
     onFrameDrop?: (event: DragEvent) => void;
     onDragOver?: ReactDragEventHandler<HTMLDivElement>;
     onDragLeave?: ReactDragEventHandler<HTMLDivElement>;
-    onDrop?: (files: FileList, event: ReactDragEvent<HTMLDivElement>) => any;
+    onDrop?: (files: FileList | null, event: ReactDragEvent<HTMLDivElement>) => any;
     dropEffect?: TDropEffects;
 }
 export interface IFileDropState {
@@ -22,25 +23,25 @@ export interface IFileDropState {
 declare class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
     static defaultProps: {
         dropEffect: TDropEffects;
-        frame: Document;
+        frame: Document | undefined;
         className: string;
         targetClassName: string;
         draggingOverFrameClassName: string;
         draggingOverTargetClassName: string;
     };
     static propTypes: {
-        className: PropTypes.Requireable<string>;
-        targetClassName: PropTypes.Requireable<string>;
-        draggingOverFrameClassName: PropTypes.Requireable<string>;
-        draggingOverTargetClassName: PropTypes.Requireable<string>;
-        onDragOver: PropTypes.Requireable<(...args: any[]) => any>;
-        onDragLeave: PropTypes.Requireable<(...args: any[]) => any>;
-        onDrop: PropTypes.Requireable<(...args: any[]) => any>;
-        dropEffect: PropTypes.Requireable<string>;
-        frame: (props: any, propName: any, componentName: any) => Error;
-        onFrameDragEnter: PropTypes.Requireable<(...args: any[]) => any>;
-        onFrameDragLeave: PropTypes.Requireable<(...args: any[]) => any>;
-        onFrameDrop: PropTypes.Requireable<(...args: any[]) => any>;
+        className: PropTypes.Requireable<any>;
+        targetClassName: PropTypes.Requireable<any>;
+        draggingOverFrameClassName: PropTypes.Requireable<any>;
+        draggingOverTargetClassName: PropTypes.Requireable<any>;
+        onDragOver: PropTypes.Requireable<any>;
+        onDragLeave: PropTypes.Requireable<any>;
+        onDrop: PropTypes.Requireable<any>;
+        dropEffect: PropTypes.Requireable<any>;
+        frame: (props: any, propName: any, componentName: any) => Error | undefined;
+        onFrameDragEnter: PropTypes.Requireable<any>;
+        onFrameDragLeave: PropTypes.Requireable<any>;
+        onFrameDrop: PropTypes.Requireable<any>;
     };
     frameDragCounter: number;
     constructor(props: IFileDropProps);
@@ -53,8 +54,8 @@ declare class FileDrop extends React.PureComponent<IFileDropProps, IFileDropStat
     handleDragOver: ReactDragEventHandler<HTMLDivElement>;
     handleDragLeave: ReactDragEventHandler<HTMLDivElement>;
     handleDrop: ReactDragEventHandler<HTMLDivElement>;
-    stopFrameListeners: (frame: HTMLElement | Document) => void;
-    startFrameListeners: (frame: HTMLElement | Document) => void;
+    stopFrameListeners: (frame: HTMLElement | Document | undefined) => void;
+    startFrameListeners: (frame: HTMLElement | Document | undefined) => void;
     componentWillReceiveProps(nextProps: IFileDropProps): void;
     componentDidMount(): void;
     componentWillUnmount(): void;
