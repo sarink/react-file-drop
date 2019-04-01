@@ -14,7 +14,7 @@ export interface IFileDropProps {
   onFrameDrop?: (event:DragEvent) => void;
   onDragOver?: ReactDragEventHandler<HTMLDivElement>;
   onDragLeave?: ReactDragEventHandler<HTMLDivElement>;
-  onDrop?: (files:FileList, event:ReactDragEvent<HTMLDivElement>) => any;
+  onDrop?: (files:FileList | null, event:ReactDragEvent<HTMLDivElement>) => any;
   dropEffect?: TDropEffects;
 }
 export interface IFileDropState {
@@ -70,11 +70,13 @@ class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
   static eventHasFiles = (event:DragEvent | ReactDragEvent<HTMLElement>) => {
     // In most browsers this is an array, but in IE11 it's an Object :(
     let hasFiles = false;
-    const types = event.dataTransfer.types;
-    for (const keyOrIndex in types) {
-      if (types[keyOrIndex] === 'Files') {
-        hasFiles = true;
-        break;
+    if (event.dataTransfer) {
+      const types = event.dataTransfer.types;
+      for (const keyOrIndex in types) {
+        if (types[keyOrIndex] === 'Files') {
+          hasFiles = true;
+          break;
+        }
       }
     }
     return hasFiles;
@@ -123,7 +125,7 @@ class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
   handleDragOver: ReactDragEventHandler<HTMLDivElement> = (event) => {
     if (FileDrop.eventHasFiles(event)) {
       this.setState({ draggingOverTarget: true });
-      if (!FileDrop.isIE()) event.dataTransfer.dropEffect = this.props.dropEffect;
+      if (!FileDrop.isIE() && this.props.dropEffect) event.dataTransfer.dropEffect = this.props.dropEffect;
       if (this.props.onDragOver) this.props.onDragOver(event);
     }
   }
@@ -142,15 +144,19 @@ class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
   }
 
   stopFrameListeners = (frame:IFileDropProps['frame']) => {
-    frame.removeEventListener('dragenter', this.handleFrameDrag);
-    frame.removeEventListener('dragleave', this.handleFrameDrag);
-    frame.removeEventListener('drop', this.handleFrameDrop);
+    if (frame) {
+      frame.removeEventListener('dragenter', this.handleFrameDrag);
+      frame.removeEventListener('dragleave', this.handleFrameDrag);
+      frame.removeEventListener('drop', this.handleFrameDrop);
+    }
   }
 
   startFrameListeners = (frame:IFileDropProps['frame']) => {
-    frame.addEventListener('dragenter', this.handleFrameDrag);
-    frame.addEventListener('dragleave', this.handleFrameDrag);
-    frame.addEventListener('drop', this.handleFrameDrop);
+    if (frame) {
+      frame.addEventListener('dragenter', this.handleFrameDrag);
+      frame.addEventListener('dragleave', this.handleFrameDrag);
+      frame.addEventListener('drop', this.handleFrameDrop);
+    }
   }
 
   componentWillReceiveProps(nextProps:IFileDropProps) {

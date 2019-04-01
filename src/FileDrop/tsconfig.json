@@ -7,6 +7,10 @@
     "moduleResolution": "node",
     "jsx": "react",
     "noImplicitAny": true,
+    "noImplicitReturns": false,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
     "allowSyntheticDefaultImports": true,
     "traceResolution": false,
     "declaration": true
