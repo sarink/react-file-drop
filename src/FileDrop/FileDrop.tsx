@@ -116,6 +116,8 @@ class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
   }
 
   handleFrameDrop = (event:DragEvent) => {
+    event.preventDefault();
+
     if (!this.state.draggingOverTarget) {
       this.resetDragging();
       if (this.props.onFrameDrop) this.props.onFrameDrop(event);
@@ -159,11 +161,11 @@ class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
     }
   }
 
-  componentWillReceiveProps(nextProps:IFileDropProps) {
-    if (nextProps.frame !== this.props.frame) {
+  componentDidUpdate(prevProps:IFileDropProps) {
+    if (prevProps.frame !== this.props.frame) {
       this.resetDragging();
-      this.stopFrameListeners(this.props.frame);
-      this.startFrameListeners(nextProps.frame);
+      this.stopFrameListeners(prevProps.frame);
+      this.startFrameListeners(this.props.frame);
     }
   }
 
