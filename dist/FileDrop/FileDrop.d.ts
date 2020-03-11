@@ -56,7 +56,7 @@ declare class FileDrop extends React.PureComponent<IFileDropProps, IFileDropStat
     handleDrop: ReactDragEventHandler<HTMLDivElement>;
     stopFrameListeners: (frame: HTMLElement | Document | undefined) => void;
     startFrameListeners: (frame: HTMLElement | Document | undefined) => void;
-    componentWillReceiveProps(nextProps: IFileDropProps): void;
+    UNSAFE_componentWillReceiveProps(nextProps: IFileDropProps): void;
     componentDidMount(): void;
     componentWillUnmount(): void;
     render(): JSX.Element;

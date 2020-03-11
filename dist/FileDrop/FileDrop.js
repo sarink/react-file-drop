@@ -90,7 +90,7 @@ var FileDrop = /** @class */ (function (_super) {
         _this.state = { draggingOverFrame: false, draggingOverTarget: false };
         return _this;
     }
-    FileDrop.prototype.componentWillReceiveProps = function (nextProps) {
+    FileDrop.prototype.UNSAFE_componentWillReceiveProps = function (nextProps) {
         if (nextProps.frame !== this.props.frame) {
             this.resetDragging();
             this.stopFrameListeners(this.props.frame);
