@@ -159,7 +159,7 @@ class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
     }
   }
 
-  componentWillReceiveProps(nextProps:IFileDropProps) {
+  UNSAFE_componentWillReceiveProps(nextProps:IFileDropProps) {
     if (nextProps.frame !== this.props.frame) {
       this.resetDragging();
       this.stopFrameListeners(this.props.frame);
