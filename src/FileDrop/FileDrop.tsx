@@ -25,7 +25,7 @@ export interface IFileDropState {
 class FileDrop extends React.PureComponent<IFileDropProps, IFileDropState> {
   static defaultProps = {
     dropEffect: ('copy' as TDropEffects),
-    frame: window ? window.document : undefined,
+    frame: typeof window === 'undefined' ? undefined : window.document,
     className: 'file-drop',
     targetClassName: 'file-drop-target',
     draggingOverFrameClassName: 'file-drop-dragging-over-frame',
