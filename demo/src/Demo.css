@@ -1,3 +1,5 @@
+/* Demo.css */
+
 .file-drop {
   /* relatively position the container bc the contents are absolute */
   position: relative;
@@ -13,7 +15,6 @@
   height: 100%;
   width: 100%;
   border-radius: 2px;
-  /* --------------- */
 
   /* horizontally and vertically center all content */
   display: flex;
@@ -42,7 +43,6 @@
   -ms-flex-line-pack: center;
 
   text-align: center;
-  /* --------------- */
 }
 
 .file-drop > .file-drop-target.file-drop-dragging-over-frame {
@@ -52,11 +52,9 @@
   box-shadow: none;
   z-index: 50;
   opacity: 1;
-  /* --------------- */
 
   /* typography */
   color: white;
-  /* --------------- */
 }
 
 .file-drop > .file-drop-target.file-drop-dragging-over-target {
