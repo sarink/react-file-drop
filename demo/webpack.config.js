@@ -73,5 +73,5 @@ module.exports = {
       inject: true,
     }),
     isDevelopment ? new webpack.HotModuleReplacementPlugin() : undefined,
-  ],
+  ].filter((p) => p),
 };
