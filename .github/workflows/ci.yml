@@ -18,13 +18,16 @@ jobs:
           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
 
       - name: Install demo node modules
-        run: cd demo && npm i --production=false
+        working-directory: demo
+        run: npm i --production=false
 
       - name: ESLint
-        run: cd demo && npm run lint -- --max-warnings=0
+        working-directory: demo
+        run: npm run lint -- --max-warnings=0
 
       - name: Prettier
-        run: cd demo && npm run format
+        working-directory: demo
+        run: npm run format
 
   file-drop-checks:
     name: File-drop checks
@@ -43,13 +46,16 @@ jobs:
           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
 
       - name: Install file-drop node modules
-        run: cd file-drop && npm i --production=false
+        working-directory: file-drop
+        run: npm i --production=false
 
       - name: ESLint
-        run: cd file-drop && npm run lint -- --max-warnings=0
+        working-directory: file-drop
+        run: npm run lint -- --max-warnings=0
 
       - name: Prettier
-        run: cd file-drop && npm run format
+        working-directory: file-drop
+        run: npm run format
 
   build:
     name: Build
@@ -68,10 +74,12 @@ jobs:
           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
 
       - name: Build file-drop
-        run: cd file-drop && npm i --production=false && NODE_ENV=production npm run build
+        working-directory: file-drop
+        run: npm i --production=false && NODE_ENV=production npm run build
 
       - name: Build demo
-        run: cd demo && npm i --production=false && NODE_ENV=production npm run build
+        working-directory: demo
+        run: npm i --production=false && NODE_ENV=production npm run build
 
   version-bump:
     name: Version bump
