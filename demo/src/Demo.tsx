@@ -1,5 +1,5 @@
 import React, { DragEvent as ReactDragEvent } from 'react';
-import { FileDrop } from 'react-file-drop/dist/FileDrop';
+import { FileDrop } from 'react-file-drop';
 import './Demo.css';
 
 export class Demo extends React.Component {
