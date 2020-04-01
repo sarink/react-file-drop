@@ -1,15 +1,23 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import PropTypes from 'prop-types';
-import React from 'react';
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var prop_types_1 = __importDefault(require("prop-types"));
+var react_1 = __importDefault(require("react"));
 var FileDrop = /** @class */ (function (_super) {
     __extends(FileDrop, _super);
     function FileDrop(props) {
@@ -30,7 +38,7 @@ var FileDrop = /** @class */ (function (_super) {
             // the event bubbles up to the frame. By keeping count of how many "dragenters" we get, we can tell if they are still
             // "draggingOverFrame" (b/c you get one "dragenter" initially, and one "dragenter"/one "dragleave" for every bubble)
             // This is far better than a "dragover" handler, which would be calling `setState` continuously.
-            _this.frameDragCounter += (event.type === 'dragenter' ? 1 : -1);
+            _this.frameDragCounter += event.type === 'dragenter' ? 1 : -1;
             if (_this.frameDragCounter === 1) {
                 _this.setState({ draggingOverFrame: true });
                 if (_this.props.onFrameDragEnter)
@@ -67,14 +75,14 @@ var FileDrop = /** @class */ (function (_super) {
         };
         _this.handleDrop = function (event) {
             if (_this.props.onDrop && FileDrop.eventHasFiles(event)) {
-                var files = (event.dataTransfer) ? event.dataTransfer.files : null;
+                var files = event.dataTransfer ? event.dataTransfer.files : null;
                 _this.props.onDrop(files, event);
             }
             _this.resetDragging();
         };
         _this.stopFrameListeners = function (frame) {
             if (frame) {
-                frame.removeEventListener('dragenter', _this.handleFrameDrag);
+                removeEventListener('dragenter', _this.handleFrameDrag);
                 frame.removeEventListener('dragleave', _this.handleFrameDrag);
                 frame.removeEventListener('drop', _this.handleFrameDrop);
             }
@@ -90,18 +98,18 @@ var FileDrop = /** @class */ (function (_super) {
         _this.state = { draggingOverFrame: false, draggingOverTarget: false };
         return _this;
     }
+    FileDrop.prototype.componentDidMount = function () {
+        this.startFrameListeners(this.props.frame);
+        this.resetDragging();
+        window.addEventListener('dragover', this.handleWindowDragOverOrDrop);
+        window.addEventListener('drop', this.handleWindowDragOverOrDrop);
+    };
     FileDrop.prototype.UNSAFE_componentWillReceiveProps = function (nextProps) {
         if (nextProps.frame !== this.props.frame) {
             this.resetDragging();
             this.stopFrameListeners(this.props.frame);
             this.startFrameListeners(nextProps.frame);
         }
-    };
-    FileDrop.prototype.componentDidMount = function () {
-        this.startFrameListeners(this.props.frame);
-        this.resetDragging();
-        window.addEventListener('dragover', this.handleWindowDragOverOrDrop);
-        window.addEventListener('drop', this.handleWindowDragOverOrDrop);
     };
     FileDrop.prototype.componentWillUnmount = function () {
         this.stopFrameListeners(this.props.frame);
@@ -116,40 +124,14 @@ var FileDrop = /** @class */ (function (_super) {
             fileDropTargetClassName += " " + draggingOverFrameClassName;
         if (draggingOverTarget)
             fileDropTargetClassName += " " + draggingOverTargetClassName;
-        return (React.createElement("div", { className: className, onDragOver: this.handleDragOver, onDragLeave: this.handleDragLeave, onDrop: this.handleDrop },
-            React.createElement("div", { className: fileDropTargetClassName }, children)));
+        return (react_1.default.createElement("div", { className: className, onDragOver: this.handleDragOver, onDragLeave: this.handleDragLeave, onDrop: this.handleDrop },
+            react_1.default.createElement("div", { className: fileDropTargetClassName }, children)));
     };
-    FileDrop.defaultProps = {
-        dropEffect: 'copy',
-        frame: typeof window === 'undefined' ? undefined : window.document,
-        className: 'file-drop',
-        targetClassName: 'file-drop-target',
-        draggingOverFrameClassName: 'file-drop-dragging-over-frame',
-        draggingOverTargetClassName: 'file-drop-dragging-over-target',
+    FileDrop.isIE = function () {
+        return typeof window !== 'undefined' &&
+            (window.navigator.userAgent.indexOf('MSIE') !== -1 ||
+                window.navigator.appVersion.indexOf('Trident/') > 0);
     };
-    FileDrop.propTypes = {
-        className: PropTypes.string,
-        targetClassName: PropTypes.string,
-        draggingOverFrameClassName: PropTypes.string,
-        draggingOverTargetClassName: PropTypes.string,
-        onDragOver: PropTypes.func,
-        onDragLeave: PropTypes.func,
-        onDrop: PropTypes.func,
-        dropEffect: PropTypes.oneOf(['copy', 'move', 'link', 'none']),
-        frame: function (props, propName, componentName) {
-            var prop = props[propName];
-            if (prop == null) {
-                return new Error('Warning: Required prop `' + propName + '` was not specified in `' + componentName + '`');
-            }
-            if (prop !== document && prop !== window && !(prop instanceof HTMLElement)) {
-                return new Error('Warning: Prop `' + propName + '` must be one of the following: document, HTMLElement!');
-            }
-        },
-        onFrameDragEnter: PropTypes.func,
-        onFrameDragLeave: PropTypes.func,
-        onFrameDrop: PropTypes.func,
-    };
-    FileDrop.isIE = function () { return ((window && ((window.navigator.userAgent.indexOf('MSIE') !== -1) || (window.navigator.appVersion.indexOf('Trident/') > 0)))); };
     FileDrop.eventHasFiles = function (event) {
         // In most browsers this is an array, but in IE11 it's an Object :(
         var hasFiles = false;
@@ -164,6 +146,37 @@ var FileDrop = /** @class */ (function (_super) {
         }
         return hasFiles;
     };
+    FileDrop.propTypes = {
+        className: prop_types_1.default.string,
+        targetClassName: prop_types_1.default.string,
+        draggingOverFrameClassName: prop_types_1.default.string,
+        draggingOverTargetClassName: prop_types_1.default.string,
+        onDragOver: prop_types_1.default.func,
+        onDragLeave: prop_types_1.default.func,
+        onDrop: prop_types_1.default.func,
+        dropEffect: prop_types_1.default.oneOf(['copy', 'move', 'link', 'none']),
+        frame: function (props, propName, componentName) {
+            var prop = props[propName];
+            if (prop == null) {
+                return new Error('Warning: Required prop `' + propName + '` was not specified in `' + componentName + '`');
+            }
+            if (prop !== document && prop !== window && !(prop instanceof HTMLElement)) {
+                return new Error('Warning: Prop `' + propName + '` must be one of the following: document, HTMLElement!');
+            }
+        },
+        onFrameDragEnter: prop_types_1.default.func,
+        onFrameDragLeave: prop_types_1.default.func,
+        onFrameDrop: prop_types_1.default.func,
+    };
+    FileDrop.defaultProps = {
+        dropEffect: 'copy',
+        frame: typeof window === 'undefined' ? undefined : window.document,
+        className: 'file-drop',
+        targetClassName: 'file-drop-target',
+        draggingOverFrameClassName: 'file-drop-dragging-over-frame',
+        draggingOverTargetClassName: 'file-drop-dragging-over-target',
+    };
     return FileDrop;
-}(React.PureComponent));
-export default FileDrop;
+}(react_1.default.PureComponent));
+exports.FileDrop = FileDrop;
+//# sourceMappingURL=FileDrop.js.map

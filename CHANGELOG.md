@@ -9,3 +9,9 @@
 * Remove AMD/standalone support (I think the time has come)
 * Remove disableDoubleDrop prop
 * Remove targetAlwaysVisible prop
+
+### v0.3.0
+* Upgrade all dependencies (most notably, react and typescript)
+* Export const FileDrop instead of default
+* Update window existence check (for SSR)
+* Refactor source to use eslint and prettier

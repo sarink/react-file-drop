@@ -1,0 +1,65 @@
+{
+  "name": "react-file-drop",
+  "author": "https://sarink.net",
+  "version": "0.3.0",
+  "description": "React component for Gmail or Facebook -like drag and drop file uploader. Drag files anywhere onto the window to highlight a 'drop area' of the page",
+  "main": "dist/FileDrop.js",
+  "types": "dist/FileDrop.d.ts",
+  "scripts": {
+    "build": "rm -rf dist/* && tsc --project .",
+    "format": "prettier --check '**/*.{js,jsx,ts,tsx,json,htm,html}'",
+    "format:fix": "prettier --write '**/*.{js,jsx,ts,tsx,json,htm,html}'",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
+    "start": "npm run build -- -w"
+  },
+  "keywords": [
+    "react file gmail",
+    "react file facebook",
+    "react file upload",
+    "react file drag drop",
+    "react",
+    "react dropzone",
+    "react-file-drop",
+    "gmail",
+    "facebook",
+    "dropzone",
+    "upload",
+    "drag",
+    "drop",
+    "drag and drop",
+    "drag n drop",
+    "file",
+    "window",
+    "document"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarink/react-file-drop.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sarink/react-file-drop/issues"
+  },
+  "homepage": "https://github.com/sarink/react-file-drop#readme",
+  "dependencies": {
+    "prop-types": "^15.7.2"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@types/prop-types": "^15.7.3",
+    "@types/react": "^16.9.30",
+    "@types/react-dom": "^16.9.5",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
+    "prettier": "^2.0.2",
+    "typescript": "^3.8.3"
+  }
+}
