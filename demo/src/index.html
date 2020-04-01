@@ -11,27 +11,27 @@
     <div id="root"></div>
     <pre class="prettyprint">
 import React from 'react';
-import FileDrop from 'react-file-drop';
+import { FileDrop } from 'react-file-drop';
+import './Demo.css';
 
-class ReactFileDropDemo extends React.Component {
-  handleDrop = (files, event) => {
-    console.log(files, event);
-  }
+export const Demo: React.FC = () =&gt; {
+  const styles = { border: '1px solid black', width: 600, color: 'black', padding: 20 };
 
-  render() {
-    return (
-      const styles = { border: '1px solid black', width: 600, color: 'black', padding: 20 };
-
-      &lt;div id="react-file-drop-demo" style={{styles}}&gt;
-        &lt;FileDrop onDrop={this.handleDrop}&gt;
-          Drop some files here!
-        &lt;/FileDrop&gt;
-      &lt;/div&gt;
-    );
-  }
-}
-
-export default ReactFileDropDemo;
+  return (
+    &lt;div id="react-file-drop-demo" style={styles}&gt;
+      &lt;FileDrop
+        onFrameDragEnter={(event) =&gt; console.log('onFrameDragEnter', event)}
+        onFrameDragLeave={(event) =&gt; console.log('onFrameDragLeave', event)}
+        onFrameDrop={(event) =&gt; console.log('onFrameDrop', event)}
+        onDragOver={(event) =&gt; console.log('onDragOver', event)}
+        onDragLeave={(event) =&gt; console.log('onDragLeave', event)}
+        onDrop={(files, event) =&gt; console.log('onDrop!', files, event)}
+      &gt;
+        Drop some files here!
+      &lt;/FileDrop&gt;
+    &lt;/div&gt;
+  );
+};
     </pre>
   </body>
   </html>
