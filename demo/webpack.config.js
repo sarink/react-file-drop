@@ -56,7 +56,7 @@ module.exports = {
         hot: true,
         inline: true,
         watchOptions: {
-          ignored: /node_modules/,
+          ignored: [/node_modules([\\]+|\/)+(?!react-file-drop)/],
         },
       }
     : undefined,
