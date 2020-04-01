@@ -1,0 +1,112 @@
+on: [push]
+
+jobs:
+  demo-checks:
+    name: Demo checks
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Read .nvmrc
+        id: node_version
+        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+
+      - name: Install demo node modules
+        run: cd demo && npm i --production=false
+
+      - name: ESLint
+        run: cd demo && npm run lint -- --max-warnings=0
+
+      - name: Prettier
+        run: cd demo && npm run format
+
+  file-drop-checks:
+    name: File-drop checks
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Read .nvmrc
+        id: node_version
+        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+
+      - name: Install file-drop node modules
+        run: cd file-drop && npm i --production=false
+
+      - name: ESLint
+        run: cd file-drop && npm run lint -- --max-warnings=0
+
+      - name: Prettier
+        run: cd file-drop && npm run format
+
+  build:
+    name: Build
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Read .nvmrc
+        id: node_version
+        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+
+      - name: Build file-drop
+        run: cd file-drop && npm i --production=false && NODE_ENV=production npm run build
+
+      - name: Build demo
+        run: cd demo && npm i --production=false && NODE_ENV=production npm run build
+
+  version-bump:
+    name: Version bump
+    needs: [demo-checks, file-drop-checks, build]
+    runs-on: ubuntu-18.04
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Automated version bump
+        uses: 'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Log package.json
+        run: cat ./package.json
+  # publish:
+  #   name: Publish to npm
+  #   runs-on: ubuntu-18.04
+  #   if: github.ref == 'refs/heads/master'
+  #   needs: [demo, file-drop, build]
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Read .nvmrc
+  #       id: node_version
+  #       run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+  #     - name: Setup node
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+  #     - name: Publish if version has been updated
+  #       uses: pascalgn/npm-publish-action@51fdb4531e99aac1873764ef7271af448dc42ab4
+  #       with:
+  #         tag_name: 'v%s'
+  #         tag_message: 'v%s'
+  #         commit_pattern: "^Release (\\S+)"
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
