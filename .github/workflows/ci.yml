@@ -85,14 +85,21 @@ jobs:
     name: Version bump
     needs: [demo-checks, file-drop-checks, build]
     runs-on: ubuntu-18.04
-    if: github.ref == 'refs/heads/master'
+    # if: github.ref == 'refs/heads/master'
     steps:
+      - name: Checkout (v1)
+        uses: actions/checkout@v1
+        with:
+          ref: ${{ github.ref }}
+
       - name: Automated version bump
         uses: 'phips28/gh-action-bump-version@master'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGEJSON_DIR: ./file-drop
 
       - name: Log package.json
+        working-directory: file-drop
         run: cat ./package.json
   # publish:
   #   name: Publish to npm
