@@ -111,7 +111,7 @@ jobs:
         with:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: ./demo/dist
+          FOLDER: demo/dist
 
       - name: Publish to npm
         working-directory: file-drop
