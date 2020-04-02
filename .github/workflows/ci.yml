@@ -81,8 +81,8 @@ jobs:
         working-directory: demo
         run: npm i --production=false && NODE_ENV=production npm run build
 
-  deploy:
-    name: Deploy
+  version-bump:
+    name: Version bump
     needs: [file-drop-checks, demo-checks, build-checks]
     runs-on: ubuntu-18.04
     if: github.ref == 'refs/heads/master'
@@ -92,11 +92,47 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - name: Automated version bump
+      - name: Read .nvmrc
+        id: node_version
+        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+
+      - name: Automated version bump for file-drop
         uses: 'phips28/gh-action-bump-version@master'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PACKAGEJSON_DIR: ./file-drop
+          PACKAGEJSON_DIR: file-drop
+
+      - name: Automated version bump for demo
+        uses: 'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGEJSON_DIR: demo
+
+  deploy:
+    name: Deploy
+    needs: [file-drop-checks, demo-checks, build-checks, version-bump]
+    runs-on: ubuntu-18.04
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Read .nvmrc
+        id: node_version
+        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+
+      - name: Version check
+        run: cat file-drop/package.json | grep version
 
       - name: Build file-drop
         working-directory: file-drop
