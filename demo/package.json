@@ -8,7 +8,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "NODE_ENV=production webpack",
+    "build": "webpack",
     "format": "prettier --check '**/*.{js,jsx,ts,tsx,json,htm,html}'",
     "format:fix": "prettier --write '**/*.{js,jsx,ts,tsx,json,htm,html}'",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
