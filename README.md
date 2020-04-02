@@ -2,7 +2,7 @@
 
 React component for Gmail or Facebook -like drag and drop file uploader. Drag files anywhere onto the window (or user defined "frame" prop)! Very extensible, provides many hooks so you can use it to develop any custom behavior that you desire.
 
-## V2 is out! See the [changelog](https://github.com/sarink/react-file-drop/blob/master/CHANGELOG.md) before upgrading
+## V3 is out! See the [changelog](https://github.com/sarink/react-file-drop/blob/master/CHANGELOG.md) before upgrading
 
 ## Demo/Example
 
