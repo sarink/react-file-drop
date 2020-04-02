@@ -6,7 +6,7 @@ React component for Gmail or Facebook -like drag and drop file uploader. Drag fi
 
 ## Demo/Example
 
-http://sarink.github.io/react-file-drop/demo/dist - A very simple demo with example code and sample CSS
+http://sarink.github.io/react-file-drop - A very simple demo with example code and sample CSS
 
 ## By default, there are no styles! You must include some CSS if you want to see anything!
 
