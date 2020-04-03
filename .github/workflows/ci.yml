@@ -101,12 +101,6 @@ jobs:
         with:
           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
 
-      - name: Automated version bump
-        uses: phips28/gh-action-bump-version@118c20934f93e82957e2e03b62782036f1baf53b
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PACKAGEJSON_DIR: file-drop
-
       - name: Build file-drop
         working-directory: file-drop
         run: npm i --production=false && NODE_ENV=production npm run build
@@ -116,7 +110,7 @@ jobs:
         run: npm i --production=false && NODE_ENV=production npm run build
 
       - name: Publish gh-pages
-        uses: JamesIves/github-pages-deploy-action@3.4.6
+        uses: JamesIves/github-pages-deploy-action@3.1.5
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -124,6 +118,16 @@ jobs:
           FOLDER: demo/dist
           TARGET_FOLDER: .
           CLEAN: true
+
+      - name: Automated version bump
+        uses: phips28/gh-action-bump-version@118c20934f93e82957e2e03b62782036f1baf53b
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGEJSON_DIR: file-drop
+
+      - name: Rebuild file-drop
+        working-directory: file-drop
+        run: npm i --production=false && NODE_ENV=production npm run build
 
       - name: Publish to npm
         working-directory: file-drop/dist
