@@ -7,6 +7,7 @@ const webpack = require('webpack');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const isDevelopment = NODE_ENV === 'development';
+const isProduction = NODE_ENV === 'production';
 
 const rootDir = path.resolve(__dirname, '../');
 const demoDir = path.resolve(__dirname);
@@ -26,7 +27,7 @@ module.exports = {
   },
 
   output: {
-    publicPath: '/', // Where you uploaded your bundled files (Relative to server root)
+    publicPath: isProduction ? '/react-file-drop/' : '/', // Where you uploaded your bundled files. (Relative to server root)
     path: distDir, // Local disk directory to store all your output files (Absolute path)
     filename: '[name]-[hash:6].bundle.js',
   },
