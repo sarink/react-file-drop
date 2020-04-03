@@ -1,89 +1,89 @@
 on: [push]
 
 jobs:
-  file-drop-checks:
-    name: File-drop checks
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+  # file-drop-checks:
+  #   name: File-drop checks
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
 
-      - name: Read .nvmrc
-        id: node_version
-        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+  #     - name: Read .nvmrc
+  #       id: node_version
+  #       run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
 
-      - name: Setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+  #     - name: Setup node
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
 
-      - name: Install file-drop node modules
-        working-directory: file-drop
-        run: npm i --production=false
+  #     - name: Install file-drop node modules
+  #       working-directory: file-drop
+  #       run: npm i --production=false
 
-      - name: ESLint
-        working-directory: file-drop
-        run: npm run lint -- --max-warnings=0
+  #     - name: ESLint
+  #       working-directory: file-drop
+  #       run: npm run lint -- --max-warnings=0
 
-      - name: Prettier
-        working-directory: file-drop
-        run: npm run format
+  #     - name: Prettier
+  #       working-directory: file-drop
+  #       run: npm run format
 
-  demo-checks:
-    name: Demo checks
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+  # demo-checks:
+  #   name: Demo checks
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
 
-      - name: Read .nvmrc
-        id: node_version
-        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+  #     - name: Read .nvmrc
+  #       id: node_version
+  #       run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
 
-      - name: Setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+  #     - name: Setup node
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
 
-      - name: Install demo node modules
-        working-directory: demo
-        run: npm i --production=false
+  #     - name: Install demo node modules
+  #       working-directory: demo
+  #       run: npm i --production=false
 
-      - name: ESLint
-        working-directory: demo
-        run: npm run lint -- --max-warnings=0
+  #     - name: ESLint
+  #       working-directory: demo
+  #       run: npm run lint -- --max-warnings=0
 
-      - name: Prettier
-        working-directory: demo
-        run: npm run format
+  #     - name: Prettier
+  #       working-directory: demo
+  #       run: npm run format
 
-  build-checks:
-    name: Build checks
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+  # build-checks:
+  #   name: Build checks
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
 
-      - name: Read .nvmrc
-        id: node_version
-        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+  #     - name: Read .nvmrc
+  #       id: node_version
+  #       run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
 
-      - name: Setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+  #     - name: Setup node
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
 
-      - name: Build file-drop
-        working-directory: file-drop
-        run: npm i --production=false && NODE_ENV=production npm run build
+  #     - name: Build file-drop
+  #       working-directory: file-drop
+  #       run: npm i --production=false && NODE_ENV=production npm run build
 
-      - name: Build demo
-        working-directory: demo
-        run: npm i --production=false && NODE_ENV=production npm run build
+  #     - name: Build demo
+  #       working-directory: demo
+  #       run: npm i --production=false && NODE_ENV=production npm run build
 
   deploy:
     name: Deploy
-    needs: [file-drop-checks, demo-checks, build-checks]
+    # needs: [file-drop-checks, demo-checks, build-checks]
     runs-on: ubuntu-18.04
     if: github.ref == 'refs/heads/master'
     steps:
@@ -101,11 +101,11 @@ jobs:
         with:
           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
 
-      - name: Automated version bump
-        uses: phips28/gh-action-bump-version@118c20934f93e82957e2e03b62782036f1baf53b
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PACKAGEJSON_DIR: file-drop
+      # - name: Automated version bump
+      #   uses: phips28/gh-action-bump-version@118c20934f93e82957e2e03b62782036f1baf53b
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     PACKAGEJSON_DIR: file-drop
 
       - name: Build file-drop
         working-directory: file-drop
