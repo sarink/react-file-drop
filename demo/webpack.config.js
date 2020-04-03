@@ -2,15 +2,17 @@ const path = require('path');
 const process = require('process');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const isDevelopment = NODE_ENV === 'development';
 
-const rootDir = path.resolve(__dirname);
-const srcDir = path.join(rootDir, 'src');
-const distDir = path.join(rootDir, 'dist');
-const nodeModulesDir = path.join(rootDir, 'node_modules');
+const rootDir = path.resolve(__dirname, '../');
+const demoDir = path.resolve(__dirname);
+const srcDir = path.join(demoDir, 'src');
+const distDir = path.join(demoDir, 'dist');
+const nodeModulesDir = path.join(demoDir, 'node_modules');
 
 module.exports = {
   context: srcDir,
@@ -71,6 +73,9 @@ module.exports = {
       chunks: ['index'],
       template: path.join(srcDir, 'index.html'),
       inject: true,
+    }),
+    new CopyWebpackPlugin([{ from: path.join(rootDir, '*.md'), to: distDir }], {
+      context: rootDir,
     }),
     isDevelopment ? new webpack.HotModuleReplacementPlugin() : undefined,
   ].filter((p) => p),
