@@ -3,8 +3,8 @@
 ### v3.0.0
 
 - Upgrade all dependencies (most notably, react and typescript)
-- Export const FileDrop instead of default
-- Update window existence check (for SSR)
+- Export FileDrop as a named const (instead of default export)
+- Update window existence checks (for SSR)
 - Refactor source to use eslint and prettier
 
 ### v0.2.0
