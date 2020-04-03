@@ -102,7 +102,7 @@ jobs:
           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
 
       - name: Automated version bump
-        uses: phips28/gh-action-bump-version@v5.0.18
+        uses: phips28/gh-action-bump-version@118c20934f93e82957e2e03b62782036f1baf53b
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PACKAGEJSON_DIR: file-drop
