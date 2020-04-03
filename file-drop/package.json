@@ -2,7 +2,7 @@
   "name": "react-file-drop",
   "author": "https://sarink.net",
   "version": "3.0.3",
-  "description": "React component for Gmail or Facebook -like drag and drop file uploader. Drag files anywhere onto the window to highlight a 'drop area' of the page",
+  "description": "Zero dependency React component for Gmail or Facebook -like drag and drop file uploader. Drag files anywhere onto the window (or user defined 'frame' prop)! Very extensible, provides many hooks so you can use it to develop any custom behavior that you desire.",
   "main": "FileDrop.js",
   "types": "FileDrop.d.ts",
   "scripts": {
@@ -18,6 +18,7 @@
     "react file facebook",
     "react file upload",
     "react file drag drop",
+    "lightweight",
     "react",
     "react dropzone",
     "react-file-drop",
@@ -31,7 +32,8 @@
     "drag n drop",
     "file",
     "window",
-    "document"
+    "document",
+    "zero dependency"
   ],
   "repository": {
     "type": "git",
