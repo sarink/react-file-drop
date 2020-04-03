@@ -81,8 +81,8 @@ jobs:
         working-directory: demo
         run: npm i --production=false && NODE_ENV=production npm run build
 
-  version-bump:
-    name: Version bump
+  deploy:
+    name: Deploy
     needs: [file-drop-checks, demo-checks, build-checks]
     runs-on: ubuntu-18.04
     if: github.ref == 'refs/heads/master'
@@ -102,33 +102,10 @@ jobs:
           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
 
       - name: Automated version bump
-        uses: 'phips28/gh-action-bump-version@master'
+        uses: phips28/gh-action-bump-version@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PACKAGEJSON_DIR: file-drop
-
-  deploy:
-    name: Deploy
-    needs: [file-drop-checks, demo-checks, build-checks, version-bump]
-    runs-on: ubuntu-18.04
-    if: github.ref == 'refs/heads/master'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      - name: Read .nvmrc
-        id: node_version
-        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
-
-      - name: Setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
-
-      - name: Version check
-        run: cat file-drop/package.json | grep version
 
       - name: Build file-drop
         working-directory: file-drop
@@ -139,11 +116,13 @@ jobs:
         run: npm i --production=false && NODE_ENV=production npm run build
 
       - name: Publish gh-pages
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@3.1.5
         with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
           FOLDER: demo/dist
+          TARGET_FOLDER: .
 
       - name: Publish to npm
         working-directory: file-drop
