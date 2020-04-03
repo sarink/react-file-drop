@@ -6,7 +6,7 @@ Zero dependency React component for Gmail or Facebook -like drag and drop file u
 
 ## Demo
 
-http://sarink.github.io/react-file-drop - A very simple live demo with example code and sample CSS
+https://sarink.github.io/react-file-drop - A very simple live demo with example code and sample CSS
 
 ## Dependencies
 
