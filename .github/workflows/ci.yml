@@ -116,7 +116,7 @@ jobs:
         run: npm i --production=false && NODE_ENV=production npm run build
 
       - name: Publish gh-pages
-        uses: JamesIves/github-pages-deploy-action@3.1.5
+        uses: JamesIves/github-pages-deploy-action@3.4.6
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
