@@ -123,6 +123,7 @@ jobs:
           BRANCH: gh-pages
           FOLDER: demo/dist
           TARGET_FOLDER: .
+          CLEAN: true
 
       - name: Publish to npm
         working-directory: file-drop
