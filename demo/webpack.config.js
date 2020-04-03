@@ -75,9 +75,13 @@ module.exports = {
       template: path.join(srcDir, 'index.html'),
       inject: true,
     }),
-    new CopyWebpackPlugin([{ from: path.join(rootDir, '*.md'), to: distDir }], {
-      context: rootDir,
-    }),
+    new CopyWebpackPlugin(
+      [
+        { from: path.join(rootDir, '*.md'), to: distDir },
+        { from: path.join(rootDir, '.gitignore'), to: distDir },
+      ],
+      { context: rootDir }
+    ),
     isDevelopment ? new webpack.HotModuleReplacementPlugin() : undefined,
   ].filter((p) => p),
 };
