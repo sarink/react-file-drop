@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, {
   DragEvent as ReactDragEvent,
   DragEventHandler as ReactDragEventHandler,
+  ReactEventHandler,
 } from 'react';
 
 export type DropEffects = 'copy' | 'move' | 'link' | 'none';
@@ -18,6 +19,7 @@ export interface FileDropProps {
   onDragOver?: ReactDragEventHandler<HTMLDivElement>;
   onDragLeave?: ReactDragEventHandler<HTMLDivElement>;
   onDrop?: (files: FileList | null, event: ReactDragEvent<HTMLDivElement>) => any;
+  onTargetClick?: ReactEventHandler<HTMLDivElement>;
   dropEffect?: DropEffects;
 }
 
@@ -55,6 +57,7 @@ export class FileDrop extends React.PureComponent<FileDropProps, FileDropState> 
     onDragOver: PropTypes.func,
     onDragLeave: PropTypes.func,
     onDrop: PropTypes.func,
+    onTargetClick: PropTypes.func,
     dropEffect: PropTypes.oneOf(['copy', 'move', 'link', 'none']),
     frame: (props: FileDropProps, propName: keyof FileDropProps, componentName: string) => {
       const prop = props[propName];
@@ -174,6 +177,13 @@ export class FileDrop extends React.PureComponent<FileDropProps, FileDropState> 
     this.resetDragging();
   };
 
+  handleTargetClick: ReactEventHandler<HTMLDivElement> = (event) => {
+    if (this.props.onTargetClick) {
+      this.props.onTargetClick(event);
+    }
+    this.resetDragging();
+  };
+
   stopFrameListeners = (frame: FileDropProps['frame']) => {
     if (frame) {
       removeEventListener('dragenter', this.handleFrameDrag);
@@ -211,7 +221,9 @@ export class FileDrop extends React.PureComponent<FileDropProps, FileDropState> 
         onDragLeave={this.handleDragLeave}
         onDrop={this.handleDrop}
       >
-        <div className={fileDropTargetClassName}>{children}</div>
+        <div className={fileDropTargetClassName} onClick={this.handleTargetClick}>
+          {children}
+        </div>
       </div>
     );
   }
