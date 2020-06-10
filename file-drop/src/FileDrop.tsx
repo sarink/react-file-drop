@@ -176,7 +176,7 @@ export class FileDrop extends React.PureComponent<FileDropProps, FileDropState> 
 
   stopFrameListeners = (frame: FileDropProps['frame']) => {
     if (frame) {
-      removeEventListener('dragenter', this.handleFrameDrag);
+      frame.removeEventListener('dragenter', this.handleFrameDrag);
       frame.removeEventListener('dragleave', this.handleFrameDrag);
       frame.removeEventListener('drop', this.handleFrameDrop);
     }
