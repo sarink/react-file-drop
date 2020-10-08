@@ -40,6 +40,8 @@ Next, define an `onDrop` prop, whenever a user drops their files onto the `targe
 
 Lastly, you'll need to style it.
 
+You can also define an `onTargetClick` prop if you want to let user browse their files from disk. Below you can find instruction how to do that.
+
 ## Styling
 
 By default, the component comes with no styles. You can grab the [demo CSS](https://raw.githubusercontent.com/sarink/react-file-drop/master/src/Demo/Demo.css) to get started.
@@ -69,6 +71,8 @@ For custom class names (if you're using something like JSS) you can use the foll
 
 `onDragLeave: function(event)`: Callback when the user leaves the target. Removes the `file-drop-dragging-over-target` class from the `file-drop-target`.
 
+`onTargetClick: function(event)`: Callback when the user clicks _anywhere_ on the target.
+
 `dropEffect - string "copy" || "move" || "link" || "none" (default: "copy")`: Learn more about [HTML5 dropEffects](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer#dropEffect.28.29). Not available in IE :(
 
 `frame: document || HTMLElement (default: document)`: This is the scope or "frame" that the user must drag some file(s) over to kick things off.
@@ -86,6 +90,53 @@ For custom class names (if you're using something like JSS) you can use the foll
 `draggingOverFrameClassName: string (default: "file-drop-dragging-over-frame")`: Class given to the target div when file is being dragged over frame.
 
 `draggingOverTargetClassName: string (default: "file-drop-dragging-over-target")`: Class given to the target div when file is being dragged over target.
+
+## Uploading files using click handler
+
+In order to let user upload files with click on the `file-drop-target`, you will need to specify an `input[type="file"]` somewhere in your code. You will also need a ref, that will be passed to the input, to call a `click` method on it.
+
+Steps:
+
+1. Define ref for input:
+
+```javascript
+const fileInputRef = useRef(null);
+```
+
+2. Define input change handler:
+
+```javascript
+const onFileInputChange = (event) => {
+  const { files } = event.target;
+  // do something with your files...
+}
+```
+
+3. Add input to your code:
+
+```html
+<input
+  onChange={onFileInputChange}
+  ref={fileInputRef}
+  type="file"
+  className="hidden"
+/>
+```
+
+4. Define target click handler:
+
+```javascript
+const onTargetClick = () => {
+  fileInputRef.current.click()
+}
+```
+
+5. Add target click handler to `FileDrop` component:
+
+```html
+<FileDrop
+  onTargetClick={onTargetClick}
+```
 
 ## Contributing
 
