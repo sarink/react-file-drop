@@ -44,7 +44,7 @@ You can also define an `onTargetClick` prop if you want to let user browse their
 
 ## Styling
 
-By default, the component comes with no styles. You can grab the [demo CSS](https://raw.githubusercontent.com/sarink/react-file-drop/master/src/Demo/Demo.css) to get started.
+By default, the component comes with no styles. You can grab the [demo CSS](https://raw.githubusercontent.com/sarink/react-file-drop/master/demo/src/Demo.css) to get started.
 
 For custom class names (if you're using something like JSS) you can use the following props:
 
