@@ -47,10 +47,7 @@
   "dependencies": {
     "prop-types": "^15.7.2"
   },
-  "peerDependencies": {
-    "react": "^16.13.1 || ^17.0.0",
-    "react-dom": "^16.13.1 || ^17.0.0"
-  },
+  "peerDependencies": {},
   "devDependencies": {
     "@types/prop-types": "^15.7.3",
     "@types/react": "^16.9.30",
