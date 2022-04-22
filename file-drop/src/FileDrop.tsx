@@ -99,11 +99,11 @@ export class FileDrop extends React.PureComponent<FileDropProps, FileDropState> 
     window.addEventListener('drop', this.handleWindowDragOverOrDrop);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps: FileDropProps) {
-    if (nextProps.frame !== this.props.frame) {
+  componentDidUpdate(prevProps: FileDropProps) {
+    if (prevProps.frame !== this.props.frame) {
       this.resetDragging();
-      this.stopFrameListeners(this.props.frame);
-      this.startFrameListeners(nextProps.frame);
+      this.stopFrameListeners(prevProps.frame);
+      this.startFrameListeners(this.props.frame);
     }
   }
 
