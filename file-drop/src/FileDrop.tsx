@@ -8,6 +8,7 @@ import React, {
 export type DropEffects = 'copy' | 'move' | 'link' | 'none';
 
 export interface FileDropProps {
+  children: React.ReactNode;
   className?: string;
   targetClassName?: string;
   draggingOverFrameClassName?: string;
