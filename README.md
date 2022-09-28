@@ -30,7 +30,7 @@ None! (well, just `prop-types`, but that should already be removed from your pro
 
 ## Usage
 
-`import { FileDrop } from 'react-file-drop`
+`import { FileDrop } from 'react-file-drop'`
 
 ## How it works
 
